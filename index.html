@@ -6,7 +6,7 @@
 <title>Agus y Guido · 26.03.27</title>
 <meta name="description" content="Nos casamos el viernes 26 de marzo en La Herencia, La Lonja. Confirmá tu asistencia acá.">
 <meta property="og:title" content="Agus y Guido se casan">
-<meta property="og:description" content="Viernes 26 de marzo, 16:30 · La Herencia, La Lonja. Confirmá acá.">
+<meta property="og:description" content="Viernes 26 de marzo · La Herencia, La Lonja. Confirmá acá.">
 <meta property="og:image" content="https://agusyguido.com.ar/fotos/03.jpg">
 <meta name="theme-color" content="#E0457B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@ const CONFIG = {
   novio: "Guido",
   fechaISO: "2027-03-26T16:30:00-03:00",
   fechaTexto: "viernes 26 de marzo de 2027",
-  fechaLimiteRSVP: "31 de diciembre de 2026",
+  fechaLimiteRSVP: "30 de noviembre de 2026",
   apiUrl: "https://script.google.com/macros/s/AKfycbx-aj8zIhTcFBCBK9q2JjtX_TuHyfenDim-XvhZ7GP6CnWjxRQWXUr2oViG1Yj-UjFB/exec",
 
   // Texto de "Nuestra historia": un párrafo por elemento. Vacío = no se muestra.
@@ -42,13 +42,9 @@ const CONFIG = {
     nota: "El salón tiene estacionamiento propio.",
   },
 
-  // hora: "" = se muestra sin horario
-  dia: [
-    { hora: "16:30", que: "Llegamos", detalle: "Bienvenida en el jardín" },
-    { hora: "", que: "Nos casamos", detalle: "El momento del sí" },
-    { hora: "", que: "Brindamos y comemos", detalle: "Mesa larga, abrazos y discursos cortos (prometido)" },
-    { hora: "", que: "Fiesta", detalle: "Pista abierta hasta que el cuerpo aguante" },
-  ],
+  // Horarios de la celebración. Vacío = muestra "Próximamente". Formato:
+  // { hora: "16:30", que: "Llegamos", detalle: "Bienvenida en el jardín" },  (hora: "" = sin horario)
+  dia: [],
   dressCode: "Elegante para llegar. Cuando arranca la fiesta, ponete cómodo. Hay jardín: mejor taco ancho que aguja.",
 
   preguntas: [
@@ -56,7 +52,7 @@ const CONFIG = {
     { p: "¿Puedo ir con acompañante?", r: "Las invitaciones son personales. Si tenés alguna duda, escribinos." },
     { p: "¿Pueden ir chicos?", r: "Esta vez la fiesta es solo para adultos. ¡Gracias por entender!" },
     { p: "¿Hay estacionamiento?", r: "Sí, el salón tiene estacionamiento propio." },
-    { p: "¿Hasta cuándo puedo confirmar?", r: "Hasta el 31 de diciembre de 2026. Podés cambiar tu respuesta cuando quieras entrando de nuevo con tu link." },
+    { p: "¿Hasta cuándo puedo confirmar?", r: "Hasta el 30 de noviembre de 2026. Podés cambiar tu respuesta cuando quieras entrando de nuevo con tu link." },
     { p: "Tengo una restricción alimentaria", r: "Contanos en el formulario (celiaquía, vegano, alergias, lo que sea) y lo coordinamos con el catering." },
   ],
 
@@ -190,6 +186,9 @@ nav a.cta{background:var(--green);color:var(--yellow)}
 .steps .h:empty::before{content:"después";font-weight:500;font-size:1rem;opacity:.75}
 .steps b{display:block;font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1}
 .steps span{display:block;margin-top:6px;font-size:1.02rem}
+.soon{border-block:3px solid var(--green);padding:34px 0}
+.soon b{display:block;font-size:clamp(2.4rem,6vw,3.6rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.soon span{display:block;margin-top:10px;font-size:1.1rem}
 .dress{background:var(--green);color:#fff;border-radius:22px;padding:30px 28px;transform:rotate(1.5deg)}
 .dress h3{font-size:2.2rem;color:var(--yellow);margin-bottom:12px}
 .dress p{margin:0;font-size:1.1rem}
@@ -292,7 +291,6 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   <a href="#dia">El día</a>
   <a href="#lugar" class="opt">Cómo llegar</a>
   <a href="#faq" class="opt">Preguntas</a>
-  <a href="#regalos">Regalos</a>
   <a href="#rsvp" class="cta">Confirmar</a>
 </nav>
 
@@ -301,7 +299,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
     <div class="stamp" aria-hidden="true">
       <div class="disc"></div>
       <svg viewBox="0 0 150 150"><defs><path id="circ" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs>
-        <text font-family="Bricolage Grotesque, sans-serif" font-size="13" font-weight="700" letter-spacing="2.2" fill="currentColor"><textPath href="#circ">viernes 26 de marzo ✺ 16:30 h ✺ la lonja ✺ </textPath></text></svg>
+        <text font-family="Bricolage Grotesque, sans-serif" font-size="13" font-weight="700" letter-spacing="2.2" fill="currentColor"><textPath href="#circ">viernes 26 de marzo ✺ la herencia ✺ la lonja ✺ </textPath></text></svg>
       <div class="c"><b>26.03</b><span>2027</span></div>
     </div>
     <h1 id="nombres"><span class="l1">agus</span><span class="l2">y guido</span></h1>
@@ -381,24 +379,6 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="regalos">
-  <div class="wrap">
-    <div class="gift">
-      <div>
-        <h2>Regalos</h2>
-        <p class="txt" id="regalosTxt" style="margin-top:20px"></p>
-      </div>
-      <div>
-        <div class="alias">
-          <small>Alias para transferir</small>
-          <b id="alias"></b>
-          <button class="btn y sm" type="button" id="copyAlias">Copiar alias</button>
-        </div>
-        <p class="fresca" id="fresca"></p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
@@ -422,11 +402,12 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   /* ---------- Contenido ---------- */
   const F = C.fotos;
   ["#st1", "#st2", "#st3"].forEach((s, i) => { const im = $(s); if (F[[2, 0, 7][i]]) im.src = F[[2, 0, 7][i]]; else im.parentNode.remove(); });
-  const tk = `<span>viernes 26 de marzo</span><i>✺</i><span>16:30 h</span><i>✺</i><span>La Herencia, La Lonja</span><i>✺</i><span>confirmá hasta fin de año</span><i>✺</i>`;
+  const tk = `<span>viernes 26 de marzo</span><i>✺</i><span>La Herencia, La Lonja</span><i>✺</i><span>confirmá antes del 30 de noviembre</span><i>✺</i>`;
   $("#ticker").innerHTML = tk.repeat(4);
   if (C.historia.length) { const s = $("#story"); s.hidden = false; s.innerHTML = C.historia.map(p => `<p>${esc(p)}</p>`).join(""); }
   $("#diaFecha").textContent = `${C.fechaTexto[0].toUpperCase()}${C.fechaTexto.slice(1)}, en La Herencia.`;
-  $("#steps").innerHTML = C.dia.map(i => `<li><div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
+  if (!C.dia.length) $("#steps").outerHTML = `<div class="soon"><b>Próximamente</b><span>Muy pronto vas a encontrar acá los horarios de la celebración.</span></div>`;
+  else $("#steps").innerHTML = C.dia.map(i => `<li><div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
   $("#dress").textContent = C.dressCode;
   $("#lugarNombre").textContent = C.lugar.nombre;
   $("#lugarDir").textContent = C.lugar.direccion;
@@ -435,10 +416,6 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   $("#wazeBtn").href = C.lugar.wazeLink;
   $("#mapa").src = C.lugar.mapsEmbed;
   $("#faqList").innerHTML = C.preguntas.map((q, i) => `<details class="${i === 0 ? "hi" : ""}"><summary>${esc(q.p)}</summary><p>${esc(q.r)}</p></details>`).join("");
-  $("#regalosTxt").textContent = C.regalos.texto;
-  $("#alias").textContent = C.regalos.alias;
-  $("#fresca").textContent = C.regalos.nota;
-  $("#copyAlias").onclick = e => { navigator.clipboard?.writeText(C.regalos.alias).then(() => { e.target.textContent = "¡Copiado!"; setTimeout(() => e.target.textContent = "Copiar alias", 1600); }); };
   $("#footContact").innerHTML = C.contactos.map(c => `<a class="btn w sm" href="https://wa.me/${esc(c.whatsapp.replace(/\D/g, ""))}" target="_blank" rel="noopener">WhatsApp ${esc(c.nombre)}</a>`).join("");
   $("#rsvpLead").textContent = `Confirmanos antes del ${C.fechaLimiteRSVP}. Si cambian los planes, podés cambiar tu respuesta cuando quieras.`;
   if (C.video) { const v = $("#video"); v.hidden = false; v.innerHTML = `<iframe src="${esc(C.video)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Video"></iframe>`; }
