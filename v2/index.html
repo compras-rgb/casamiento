@@ -7,12 +7,12 @@
 <meta name="description" content="Nos casamos el viernes 26 de marzo en La Herencia, La Lonja. Confirmá tu asistencia acá.">
 <meta property="og:title" content="¡Agus y Guido se casan!">
 <meta property="og:description" content="Viernes 26 de marzo · La Herencia, La Lonja. Confirmá acá.">
-<meta property="og:image" content="https://agusyguido.com.ar/fotos/03.jpg">
-<meta name="theme-color" content="#F2EBDD">
+<meta property="og:image" content="https://agusyguido.com.ar/v2/img/n1.jpg">
+<meta name="theme-color" content="#121212">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,500;1,500;1,700&family=Mrs+Saint+Delafield&family=Permanent+Marker&family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23F2EBDD'/><text x='50%25' y='58%25' font-size='34' text-anchor='middle' dominant-baseline='middle' font-family='Georgia' font-style='italic' font-weight='700' fill='%23161616'>AG</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,500;1,500;1,700&family=Mrs+Saint+Delafield&family=Permanent+Marker&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23D7261E'/><text x='50%25' y='58%25' font-size='32' text-anchor='middle' dominant-baseline='middle' font-family='Georgia' font-style='italic' font-weight='700' fill='%23F4ECDD'>AG</text></svg>">
 <script>
 /* ============ CONFIGURACIÓN (versión 2) ============ */
 const CONFIG = {
@@ -25,184 +25,457 @@ const CONFIG = {
 };
 </script>
 <style>
+:root{
+  --ink:#121212; --cream:#F4ECDD; --paper:#FBF6EC; --red:#D7261E; --red-d:#A3160F;
+  --gold:#F4B63C; --gold-l:#FFD978; --bordo:#4A1317;
+  --s-anton:'Anton',Impact,sans-serif; --s-serif:'Playfair Display',Georgia,serif;
+  --s-firma:'Mrs Saint Delafield',cursive; --s-marker:'Permanent Marker',cursive;
+}
 *{box-sizing:border-box}
-html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-ui,sans-serif;-webkit-text-size-adjust:100%}
-.band{width:100%;display:flex;justify-content:center;overflow:hidden}
-.board{width:calc(390px * var(--s,1));height:calc(844px * var(--s,1));position:relative}
-.board>section{position:absolute!important;left:0;top:0;width:390px;transform:scale(var(--s,1));transform-origin:0 0}
-.board a,.board button{-webkit-tap-highlight-color:transparent}
-.board a:active,.board button:active{opacity:.85}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--ink);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-text-size-adjust:100%;overflow-x:clip}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+.wrap{width:100%;max-width:520px;margin:0 auto;position:relative}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tape{position:absolute;width:92px;height:26px;background:rgba(244,214,140,.72);box-shadow:0 1px 2px rgba(0,0,0,.15);z-index:3}
+.marker{font-family:var(--s-marker)}
+.firma{font-family:var(--s-firma);font-weight:400}
+.reveal{opacity:0;transform:translateY(24px) rotate(var(--r,0deg));transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0) rotate(var(--r,0deg))}
 
-/* ---- RSVP ---- */
-.sheet{position:fixed;inset:0;z-index:50;background:rgba(22,22,22,.55);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.sheet.open{display:block}
-.paper{position:relative;max-width:460px;margin:0 auto;min-height:100%;background:#F2EBDD;padding:22px 20px 40px}
-@media(min-width:500px){.paper{margin:30px auto;min-height:0;box-shadow:0 20px 60px rgba(0,0,0,.4)}}
-.paper .x{position:absolute;right:12px;top:10px;border:0;background:none;font-size:34px;line-height:1;cursor:pointer;color:#161616;padding:6px 10px}
-.paper h3{font-family:'Anton',sans-serif;font-weight:400;font-size:52px;line-height:.9;margin:8px 0 0}
-.paper h3 em{font-style:normal;color:#C62420}
-.paper .firma{font-family:'Mrs Saint Delafield',cursive;font-size:38px;color:#C62420;margin:-2px 0 14px;transform:rotate(-3deg);display:inline-block}
-.lbl{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:12.5px;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px;color:#161616}
+/* ========== 1. PORTADA ========== */
+#hero{position:relative;height:100svh;min-height:600px;overflow:hidden;background:#000;color:var(--cream)}
+#hero .bg{position:absolute;inset:0;background:url(img/n1.jpg) 38% 30%/cover no-repeat;transform:scale(1.08);animation:kb 14s ease-out forwards}
+@keyframes kb{to{transform:scale(1)}}
+#hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 48%,rgba(0,0,0,.82) 78%,#000 100%)}
+#hero .flash{position:absolute;inset:0;background:#fff;animation:flash 1s ease-out .15s both;pointer-events:none}
+@keyframes flash{0%{opacity:0}8%{opacity:.95}100%{opacity:0}}
+#hero .top{position:absolute;left:18px;right:18px;top:calc(16px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+.mono{font-family:var(--s-serif);font-style:italic;font-weight:700;font-size:34px;line-height:1;letter-spacing:-6px;color:var(--cream)}
+.mono b{color:var(--red);font-weight:700}
+.burst{width:92px;height:92px;position:relative;animation:spin 18s linear infinite}
+.burst svg{position:absolute;inset:0}
+.burst span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--s-anton);font-size:17px;line-height:1;color:var(--ink);text-align:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+#hero .copy{position:absolute;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));padding:0 18px;z-index:2}
+.hola{display:inline-block;background:var(--gold);color:var(--ink);font-family:var(--s-marker);font-size:18px;padding:6px 12px;transform:rotate(-3deg);margin-bottom:10px}
+.hola[hidden]{display:none}
+.big{font-family:var(--s-anton);font-weight:400;line-height:.84;margin:0;text-transform:uppercase}
+#hero h1{font-size:clamp(84px,27vw,132px)}
+#hero h1 .l1{display:block;color:var(--cream)}
+#hero h1 .l2{display:block;color:var(--red);font-size:.79em}
+#hero h1 .ch{display:inline-block;animation:pop .55s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{from{transform:translateY(40px) scale(.6);opacity:0}}
+#hero .names{font-family:var(--s-firma);font-size:clamp(48px,14vw,68px);line-height:1;color:var(--cream);margin:14px 0 0 4px;transform:rotate(-6deg);transform-origin:left}
+#hero .sub{display:inline-block;margin-top:14px;background:var(--cream);color:var(--ink);font-family:var(--s-marker);font-size:17px;padding:8px 14px;transform:rotate(1.5deg);position:relative}
+.scroll-hint{position:absolute;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);font-family:var(--s-marker);font-size:14px;color:var(--cream);opacity:.85;z-index:2;animation:bob 1.6s ease-in-out infinite;text-align:center}
+@keyframes bob{50%{transform:translate(-50%,6px)}}
+
+/* ticker */
+.ticker{background:var(--red);color:var(--cream);overflow:hidden;white-space:nowrap;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(-1.6deg) scale(1.04);margin:-14px 0 -10px;position:relative;z-index:5}
+.ticker .track{display:inline-block;padding:10px 0;font-family:var(--s-anton);font-size:22px;letter-spacing:.5px;animation:tick 22s linear infinite}
+.ticker .track span{margin:0 14px}
+.ticker .track i{font-style:normal;color:var(--gold)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ========== 2. ENSAYO (fotos) ========== */
+#ensayo{background:var(--cream);position:relative;overflow:hidden;padding:56px 0 40px;min-height:100svh;display:flex;align-items:center}
+#ensayo .wrap{padding:0 20px}
+.kicker{font-family:'Inter';font-weight:800;font-size:11px;letter-spacing:3.5px;text-transform:uppercase}
+#ensayo h2{font-size:clamp(54px,16vw,78px);margin-top:6px}
+#ensayo h2 em{font-style:normal;color:var(--red)}
+#ensayo .lead{font-family:var(--s-serif);font-style:italic;font-size:19px;margin:8px 0 0;max-width:320px}
+.stack{position:relative;height:min(470px,62svh);margin:26px auto 0;max-width:330px}
+.card{position:absolute;inset:0;margin:auto;width:86%;height:100%;background:var(--paper);padding:10px 10px 54px;box-shadow:0 14px 34px rgba(0,0,0,.28);cursor:pointer;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .35s;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.card img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.card .cap{position:absolute;left:12px;right:12px;bottom:12px;font-family:var(--s-marker);font-size:17px;line-height:1.1;color:var(--ink);text-align:center}
+.card.fly{transform:translateX(130%) rotate(24deg)!important;opacity:0}
+.stack-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;font-family:var(--s-marker);font-size:15px}
+.stack-hint .dots{display:flex;gap:6px}
+.stack-hint .dots i{width:9px;height:9px;border-radius:50%;background:rgba(18,18,18,.2)}
+.stack-hint .dots i.on{background:var(--red)}
+
+/* ========== 3. EL PLAN (copa) ========== */
+#plan{background:var(--ink);color:var(--cream);height:340svh;position:relative}
+#plan .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(34px + env(safe-area-inset-top)) 0 20px}
+#plan .wrap{padding:0 20px;display:flex;flex-direction:column;height:100%}
+#plan h2{font-family:var(--s-serif);font-style:italic;font-weight:500;font-size:clamp(44px,13vw,60px);line-height:.95;margin:6px 0 0}
+#plan h2 b{font-weight:700;color:var(--gold)}
+#plan .lead{font-size:15px;line-height:1.45;color:#D9D0BF;margin:10px 0 0;max-width:330px}
+.timeline{flex:1;display:flex;gap:14px;align-items:stretch;margin-top:18px;min-height:0}
+.flute{flex:0 0 auto;height:100%;max-height:560px;width:auto;aspect-ratio:100/300;position:relative}
+.flute svg{height:100%;width:auto;overflow:visible}
+.steps{flex:1;position:relative;max-height:560px;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px}
+.step{position:relative;transform:translateX(30px);opacity:.12;transition:opacity .45s ease,transform .55s cubic-bezier(.2,1.4,.4,1)}
+.step.on{opacity:1;transform:none}
+.step .t{display:inline-block;font-family:var(--s-anton);font-size:34px;line-height:1;color:var(--ink);background:var(--gold);padding:3px 8px 1px;transform:rotate(-3deg)}
+.step:nth-child(even) .t{background:var(--red);color:var(--cream);transform:rotate(2deg)}
+.step .n{font-family:var(--s-serif);font-style:italic;font-size:24px;line-height:1.1;margin-top:6px}
+.step .d{font-size:13.5px;line-height:1.35;color:#CFC6B5;margin-top:2px}
+.salud{position:absolute;left:50%;top:16%;transform:translate(-50%,-50%) rotate(-8deg) scale(.4);font-family:var(--s-marker);font-size:56px;color:var(--gold-l);opacity:0;transition:all .5s cubic-bezier(.2,1.6,.4,1);pointer-events:none;text-shadow:3px 3px 0 var(--red);white-space:nowrap;z-index:4}
+.salud.on{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1)}
+.plan-hint{font-family:var(--s-marker);font-size:13px;color:#9E9686;text-align:center;margin-top:8px;transition:opacity .3s}
+
+/* ========== 4. DETALLES ========== */
+#detalles{background:var(--cream);position:relative;overflow:hidden;padding:56px 0 64px;min-height:100svh}
+#detalles .wrap{padding:0 18px}
+#detalles h2{font-size:clamp(64px,19vw,92px)}
+#detalles .firma{font-size:34px;color:var(--red);margin:-6px 0 0 10px;transform:rotate(-4deg);display:inline-block}
+.det-photo{position:absolute;right:-4px;top:24px;width:104px;background:var(--paper);padding:6px 6px 22px;transform:rotate(7deg);box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.det-photo img{aspect-ratio:3/4;object-fit:cover;width:100%}
+.det-photo .tape{width:60px;height:18px;left:28px;top:-9px;transform:rotate(-6deg)}
+.faq{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.q{background:var(--paper);border:2.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transform:rotate(var(--r));transition:transform .25s,box-shadow .25s,background .25s}
+.q.open{transform:rotate(0);box-shadow:3px 3px 0 var(--red);background:#fff}
+.q button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.q button:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.q .ico{flex:0 0 40px;height:40px;border-radius:50%;background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:center}
+.q:nth-child(3n+2) .ico{background:var(--red)}
+.q:nth-child(3n+3) .ico{background:var(--gold);color:var(--ink)}
+.q .lbl{flex:1;font-family:var(--s-anton);font-size:21px;line-height:1.05;text-transform:uppercase;letter-spacing:.2px}
+.q .lbl small{display:block;font-family:'Inter';font-weight:500;font-size:12.5px;letter-spacing:0;text-transform:none;color:#6b6358;margin-top:3px}
+.q .plus{flex:0 0 28px;font-family:var(--s-marker);font-size:30px;line-height:1;color:var(--red);transition:transform .3s;text-align:center}
+.q.open .plus{transform:rotate(45deg)}
+.q .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.q.open .ans{grid-template-rows:1fr}
+.q .ans>div{overflow:hidden}
+.q .ans p{margin:0;padding:0 16px 4px 66px;font-size:15px;line-height:1.5}
+.q .ans .btns{display:flex;gap:8px;padding:10px 14px 4px 66px}
+.q .ans .pad{height:12px}
+.pill{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:12px 8px;border:2px solid var(--ink)}
+.pill.k{background:var(--ink);color:var(--cream)}
+.pill.r{background:var(--red);color:#fff;border-color:var(--red)}
+.colors{display:flex;gap:6px;padding:8px 16px 0 66px;align-items:center}
+.colors i{width:24px;height:24px;border-radius:50%;border:2px solid var(--ink);position:relative}
+.colors i::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2.5px;background:var(--red);transform:translateX(-50%) rotate(45deg)}
+.colors span{font-family:var(--s-marker);font-size:13px;margin-left:4px}
+
+/* ========== 5. CONFIRMACIÓN ========== */
+#confirmar{position:relative;min-height:100svh;color:var(--cream);overflow:hidden;background:#000;display:flex;flex-direction:column}
+#confirmar .bg{position:absolute;inset:0;background:#1d0507 url(img/n5.jpg) 50% 0/min(100%,620px) auto no-repeat}
+#confirmar .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,5,7,.25) 0%,rgba(29,5,7,0) 20%,rgba(29,5,7,.1) 38%,rgba(29,5,7,.9) 56%,#1d0507 66%)}
+#confirmar .wrap{position:relative;z-index:2;padding:0 18px calc(26px + env(safe-area-inset-bottom));margin-top:auto}
+.venis{font-size:clamp(96px,31vw,150px);color:var(--cream);text-shadow:5px 5px 0 var(--red);margin-top:min(98vw,560px)}
+.cuando{font-family:var(--s-serif);font-size:19px;line-height:1.35;margin:10px 0 0}
+.cuando b{font-family:var(--s-anton);font-weight:400;font-size:26px;letter-spacing:.5px;color:var(--gold-l)}
+.cuando i{font-style:italic}
+.cta{display:grid;grid-template-columns:1.35fr 1fr;gap:10px;margin-top:20px}
+.cta button{border:3px solid var(--ink);cursor:pointer;padding:16px 8px;font-family:var(--s-anton);font-size:24px;line-height:1;text-transform:uppercase;transition:transform .15s}
+.cta button:active{transform:scale(.96)}
+.cta .si{background:var(--gold);color:var(--ink);box-shadow:5px 5px 0 var(--red);animation:wig 2.8s ease-in-out infinite}
+.cta .no{background:transparent;color:var(--cream);border-color:var(--cream);font-size:19px}
+@keyframes wig{0%,84%,100%{transform:rotate(0)}88%{transform:rotate(-3deg)}92%{transform:rotate(3deg)}96%{transform:rotate(-2deg)}}
+.count{display:flex;align-items:center;gap:12px;margin-top:20px}
+.count .num{font-family:var(--s-anton);font-size:64px;line-height:.85;color:var(--ink);background:var(--cream);padding:6px 10px 2px;transform:rotate(-4deg);min-width:96px;text-align:center}
+.count .txt{font-family:var(--s-marker);font-size:18px;line-height:1.15}
+.count .txt span{color:var(--gold-l)}
+.closing{text-align:center;margin-top:30px}
+.closing .marker{font-size:24px;color:var(--gold-l)}
+.closing .firma{font-size:58px;line-height:1;margin-top:-2px}
+
+/* ========== HOJA DE CONFIRMACIÓN ========== */
+.sheet{position:fixed;inset:0;z-index:60;background:rgba(10,10,10,.6);opacity:0;pointer-events:none;transition:opacity .3s;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet.open{opacity:1;pointer-events:auto}
+.ticket{position:relative;max-width:480px;margin:9svh auto 0;min-height:91svh;background:var(--paper);transform:translateY(40px);transition:transform .45s cubic-bezier(.2,1.2,.3,1);padding:0 0 40px}
+.sheet.open .ticket{transform:translateY(0)}
+@media(min-width:520px){.ticket{margin:5vh auto;min-height:0;box-shadow:0 30px 70px rgba(0,0,0,.5)}}
+.ticket .head{background:var(--red);color:var(--cream);padding:18px 20px 22px;position:relative}
+.ticket .head::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:20px;background:radial-gradient(circle at 10px 10px,var(--paper) 7px,transparent 7.5px) 0 0/20px 20px repeat-x}
+.ticket .head .kicker{color:var(--gold-l)}
+.ticket .head h3{font-family:var(--s-anton);font-weight:400;font-size:46px;line-height:.9;margin:6px 0 0;text-transform:uppercase}
+.ticket .x{position:absolute;right:10px;top:8px;border:0;background:none;color:var(--cream);font-size:36px;line-height:1;cursor:pointer;padding:6px 10px}
+.ticket .body{padding:26px 20px 0}
+.lb{display:block;font-weight:800;font-size:11.5px;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 8px}
 .field{margin-bottom:20px}
-.paper input[type=text],.paper input:not([type]),.paper textarea{width:100%;font:inherit;font-size:16px;color:#161616;background:#FBF7EE;border:1.5px solid #161616;border-radius:0;padding:13px 14px;outline:none}
-.paper input:focus,.paper textarea:focus{border-color:#C62420;box-shadow:0 0 0 2px rgba(198,36,32,.2)}
-.paper textarea{min-height:84px;resize:vertical}
+.ticket input[type=text],.ticket input:not([type]),.ticket textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:2.5px solid var(--ink);border-radius:0;padding:13px 14px;outline:none}
+.ticket input:focus,.ticket textarea:focus{border-color:var(--red)}
+.ticket textarea{min-height:84px;resize:vertical}
 .code-box{display:flex;gap:8px}
-.code-box input{text-transform:uppercase;letter-spacing:.2em;text-align:center;font-size:20px!important;font-weight:700}
-.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:0;padding:15px 22px;font:inherit;font-weight:600;font-size:16px;cursor:pointer;background:#C62420;color:#fff;text-decoration:none}
-.btn.dark{background:#161616;color:#F2EBDD}
-.btn.ghost{background:transparent;color:#161616;box-shadow:inset 0 0 0 1.5px #161616}
+.code-box input{text-transform:uppercase;letter-spacing:.25em;text-align:center;font-family:var(--s-anton);font-size:24px!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:2.5px solid var(--ink);padding:14px 20px;font-family:var(--s-anton);font-size:21px;text-transform:uppercase;cursor:pointer;background:var(--red);color:#fff;text-decoration:none;box-shadow:4px 4px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.k{background:var(--ink);color:var(--cream)}
+.btn.g{background:transparent;color:var(--ink);box-shadow:none}
 .btn[disabled]{opacity:.6;cursor:wait}
+.hey{font-family:var(--s-serif);font-style:italic;font-size:24px;margin:0 0 16px}
 .choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
 .choice input,.chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
-.choice label{display:block;text-align:center;padding:16px 8px;cursor:pointer;background:#FBF7EE;border:1.5px solid #161616}
-.choice label b{display:block;font-family:'Anton',sans-serif;font-weight:400;font-size:30px;line-height:1.05}
-.choice label span{font-size:13px;color:#5b554c}
-.choice input:checked + label.si{background:#C62420;border-color:#C62420;color:#fff}
-.choice input:checked + label.si span{color:#FBE3E0}
-.choice input:checked + label.no{background:#161616;border-color:#161616;color:#F2EBDD}
+.choice label{display:block;text-align:center;padding:14px 8px;cursor:pointer;background:#fff;border:2.5px solid var(--ink);transition:transform .15s}
+.choice label b{display:block;font-family:var(--s-anton);font-weight:400;font-size:30px;line-height:1.05;text-transform:uppercase}
+.choice label span{font-size:13px;color:#6b6358}
+.choice input:checked + label.si{background:var(--gold);transform:rotate(-2deg);box-shadow:4px 4px 0 var(--red)}
+.choice input:checked + label.no{background:var(--ink);color:var(--cream);transform:rotate(2deg)}
 .choice input:checked + label.no span{color:#cfc7b8}
-.choice input:focus-visible + label,.chips input:focus-visible + label{outline:2px solid #C62420;outline-offset:2px}
+.choice input:focus-visible + label,.chips input:focus-visible + label{outline:3px solid var(--red);outline-offset:2px}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
-.chips label{padding:9px 13px;background:#FBF7EE;cursor:pointer;font-size:14.5px;border:1.5px solid #161616}
-.chips input:checked + label{background:#161616;color:#F2EBDD}
-.nota{background:#FBF7EE;border-left:4px solid #C62420;padding:11px 13px;margin:12px 0 0;font-size:14px;line-height:1.45}
+.chips label{padding:9px 13px;background:#fff;cursor:pointer;font-size:14.5px;border:2px solid var(--ink);font-weight:500}
+.chips input:checked + label{background:var(--ink);color:var(--cream)}
+.nota{background:#FFF1C9;border-left:5px solid var(--red);padding:11px 13px;margin:12px 0 0;font-size:14px;line-height:1.45}
 .details[hidden]{display:none}
-.check{display:flex;gap:12px;align-items:flex-start;background:#FBF7EE;border:1.5px solid #161616;padding:13px 14px;cursor:pointer;font-size:14.5px;line-height:1.45}
-.check:has(input:checked){border-color:#C62420;box-shadow:inset 0 0 0 1px #C62420}
-.check input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:#C62420}
-.small{font-size:13.5px;color:#5b554c}
-.small a{color:#C62420}
+.check{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2.5px solid var(--ink);padding:13px 14px;cursor:pointer;font-size:14.5px;line-height:1.45}
+.check:has(input:checked){border-color:var(--red);box-shadow:4px 4px 0 var(--red)}
+.check input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:var(--red)}
+.small{font-size:13.5px;color:#6b6358}
+.small a{color:var(--red)}
 .msg{padding:11px 13px;margin:12px 0 0;font-size:14.5px;background:#F9DCD8;color:#8E1A16}
-.done{text-align:center;padding-top:10px}
+.done{text-align:center;padding-top:8px}
+.done .big{font-size:58px;color:var(--red)}
+.done p{font-size:16px;line-height:1.5}
 .done .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.marker{font-family:'Permanent Marker',cursive;color:#C62420}
+
+/* confetti */
+.conf{position:fixed;top:-20px;z-index:80;pointer-events:none;width:10px;height:14px;animation:fall linear forwards}
+@keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(var(--rot))}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<div class="band" style="background:linear-gradient(#F2EBDD 0 55%,#161616 55%)"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #F2EBDD; position: relative; overflow: hidden">
-    <div style="position:absolute; left:22px; top:20px; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:34px; line-height:1; letter-spacing:-6px">A<span style="color:#C62420">G</span></div>
-    <div style="position:absolute; right:22px; top:30px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:11px; letter-spacing:3px">LA HERENCIA · LA LONJA</div>
-    <div style="position:absolute; left:18px; top:66px; font-family:'Anton',sans-serif; font-size:128px; line-height:.86; color:#161616">¡NOS</div>
-    <div style="position:absolute; left:16px; top:174px; font-family:'Anton',sans-serif; font-size:93px; line-height:.86; color:#C62420">CASAMOS!</div>
-    <div style="position:absolute; right:12px; top:84px; transform:rotate(-10deg); font-family:'Mrs Saint Delafield',cursive; font-size:54px; line-height:.9; text-align:center; color:#161616">Agus<br>&amp; Guido</div>
-    <div id="hola" style="position:absolute; left:22px; top:300px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:13px; letter-spacing:3px; line-height:1.7">NOS ENCANTARÍA<br>COMPARTIRLO<br>CON VOS</div>
-    <div style="position:absolute; left:22px; top:385px; font-family:'Permanent Marker',cursive; font-size:24px; color:#C62420">♡</div>
-    <img src="img/disco.png" alt="" style="position:absolute; right:0; top:290px; width:205px; mix-blend-mode:multiply; transform:rotate(-4deg); -webkit-mask-image:radial-gradient(ellipse 60% 62% at 50% 50%, #000 62%, transparent 100%); mask-image:radial-gradient(ellipse 60% 62% at 50% 50%, #000 62%, transparent 100%)">
-    <div style="position:absolute; left:0; top:426px; width:390px"><svg aria-hidden="true" width="390" height="44" viewBox="0 0 390 44" style="display:block" preserveAspectRatio="none"><path d="M0 44 L0.0 10.3 L9.3 26.3 L17.1 17.5 L25.2 29.1 L36.6 11.5 L43.7 19.5 L55.2 25.3 L62.1 13.9 L75.0 19.8 L83.9 17.4 L99.4 17.5 L111.0 18.6 L121.2 30.7 L137.2 18.7 L145.2 27.5 L153.2 10.1 L168.2 20.2 L182.4 19.7 L197.2 21.1 L204.9 10.4 L216.4 25.4 L231.5 12.1 L243.7 18.9 L254.7 13.5 L263.6 22.5 L278.8 12.6 L289.7 29.3 L305.4 14.7 L312.7 32.6 L328.4 21.6 L335.0 32.2 L344.8 31.7 L357.0 29.8 L364.6 28.9 L372.9 19.7 L387.3 29.9 L390.0 15.2 L390 44 Z" fill="#161616"></path></svg></div>
-    <div style="position:absolute; left:0; top:468px; width:390px; height:376px; background:#161616"></div>
-    <div style="position:absolute; left:26px; top:500px; width:220px; height:282px; background:#FBF7EE; padding:10px 10px 30px; box-sizing:border-box; clip-path:polygon(0.0% 0.5%,4.5% 0.2%,9.1% 1.0%,13.6% 0.1%,18.2% 0.9%,22.7% 0.6%,27.3% 0.1%,31.8% 0.8%,36.4% 0.1%,40.9% 0.7%,45.5% 0.1%,50.0% 0.1%,54.5% 0.7%,59.1% 1.3%,63.6% 0.2%,68.2% 0.4%,72.7% 1.0%,77.3% 1.5%,81.8% 0.9%,86.4% 0.6%,90.9% 1.6%,95.5% 0.1%,100.0% 1.4%,99.5% 4.5%,99.8% 9.1%,99.8% 13.6%,99.5% 18.2%,98.7% 22.7%,99.7% 27.3%,99.1% 31.8%,99.0% 36.4%,99.4% 40.9%,99.1% 45.5%,99.9% 50.0%,99.9% 54.5%,99.7% 59.1%,98.9% 63.6%,99.3% 68.2%,99.5% 72.7%,99.1% 77.3%,99.3% 81.8%,99.5% 86.4%,98.7% 90.9%,98.9% 95.5%,99.6% 100.0%,95.5% 99.1%,90.9% 99.2%,86.4% 98.6%,81.8% 98.8%,77.3% 99.5%,72.7% 98.4%,68.2% 99.8%,63.6% 99.3%,59.1% 98.8%,54.5% 99.8%,50.0% 99.2%,45.5% 99.9%,40.9% 98.9%,36.4% 98.8%,31.8% 99.1%,27.3% 98.6%,22.7% 99.5%,18.2% 98.9%,13.6% 99.0%,9.1% 99.1%,4.5% 99.3%,0.0% 98.7%,1.5% 95.5%,0.8% 90.9%,1.1% 86.4%,0.1% 81.8%,1.1% 77.3%,1.0% 72.7%,1.6% 68.2%,1.3% 63.6%,0.5% 59.1%,0.6% 54.5%,1.1% 50.0%,0.0% 45.5%,0.7% 40.9%,0.3% 36.4%,0.2% 31.8%,0.1% 27.3%,1.2% 22.7%,0.2% 18.2%,0.4% 13.6%,0.6% 9.1%,1.4% 4.5%); transform:rotate(-4deg)">
-      <img src="../fotos/11.jpg" alt="Agus y Guido en la playa" style="width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.05)">
+
+<!-- 1. PORTADA -->
+<header id="hero" class="grain">
+  <div class="bg" role="img" aria-label="Agus con el ramo en alto y Guido, de noche, con anteojos de sol"></div>
+  <div class="shade"></div>
+  <div class="flash"></div>
+  <div class="top">
+    <div class="mono">A<b>G</b></div>
+    <div class="burst" aria-label="26 de marzo de 2027">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#F4B63C" points="50,0 58,14 73,5 75,22 92,19 86,35 100,42 88,53 97,68 80,70 80,87 64,82 57,98 46,85 32,96 28,79 11,80 17,64 2,56 15,45 5,30 22,27 22,10 38,16"/></svg>
+      <span>26.03<br>2027</span>
     </div>
-    <div style="position:absolute; right:16px; top:560px; width:150px; background:#F2EBDD; clip-path:polygon(0.0% 0.1%,4.5% 0.7%,9.1% 0.9%,13.6% 1.4%,18.2% 1.3%,22.7% 1.4%,27.3% 0.4%,31.8% 0.7%,36.4% 0.6%,40.9% 1.4%,45.5% 1.5%,50.0% 0.2%,54.5% 0.3%,59.1% 0.4%,63.6% 0.4%,68.2% 0.8%,72.7% 0.9%,77.3% 0.4%,81.8% 0.0%,86.4% 0.7%,90.9% 0.6%,95.5% 0.9%,100.0% 1.5%,98.9% 4.5%,99.2% 9.1%,99.0% 13.6%,98.9% 18.2%,99.9% 22.7%,98.6% 27.3%,98.8% 31.8%,98.6% 36.4%,98.7% 40.9%,99.4% 45.5%,99.4% 50.0%,99.8% 54.5%,99.0% 59.1%,99.9% 63.6%,99.9% 68.2%,99.7% 72.7%,99.7% 77.3%,99.5% 81.8%,99.9% 86.4%,100.0% 90.9%,99.8% 95.5%,99.8% 100.0%,95.5% 99.4%,90.9% 100.0%,86.4% 98.6%,81.8% 99.0%,77.3% 99.8%,72.7% 99.6%,68.2% 99.4%,63.6% 99.4%,59.1% 99.8%,54.5% 98.6%,50.0% 98.4%,45.5% 99.3%,40.9% 99.2%,36.4% 99.9%,31.8% 99.8%,27.3% 99.5%,22.7% 99.6%,18.2% 98.7%,13.6% 99.7%,9.1% 100.0%,4.5% 98.5%,0.0% 99.2%,0.2% 95.5%,0.9% 90.9%,0.0% 86.4%,0.8% 81.8%,1.6% 77.3%,1.4% 72.7%,1.1% 68.2%,0.4% 63.6%,0.6% 59.1%,0.3% 54.5%,1.2% 50.0%,0.9% 45.5%,1.2% 40.9%,0.5% 36.4%,0.4% 31.8%,1.3% 27.3%,1.6% 22.7%,1.4% 18.2%,1.3% 13.6%,1.3% 9.1%,1.2% 4.5%); padding:16px 12px; transform:rotate(5deg); text-align:center">
-      <div style="font-family:'Permanent Marker',cursive; font-size:24px; color:#C62420; line-height:1">26.03.2027</div>
-      <div style="margin-top:6px"><svg aria-hidden="true" width="120" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style="display:block"><path d="M2 9 C40 3 90 12 130 6 C160 2 185 8 198 5" stroke="#C62420" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
+  </div>
+  <div class="copy">
+    <div class="hola" id="hola" hidden></div>
+    <h1 class="big" aria-label="¡Nos casamos!"><span class="l1" data-split>¡Nos</span><span class="l2" data-split>casamos!</span></h1>
+    <div class="names">Agus &amp; Guido</div>
+    <div class="sub">Nos encantaría compartirlo con vos</div>
+  </div>
+  <div class="scroll-hint">deslizá<br>↓</div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="ticker"></div></div>
+
+<!-- 2. ENSAYO GENERAL -->
+<section id="ensayo" class="grain">
+  <div class="wrap">
+    <div class="kicker reveal">01 / Nosotros</div>
+    <h2 class="big reveal">Ensayo<br><em>general</em></h2>
+    <p class="lead reveal">Ya practicamos la parte más importante de la noche.</p>
+    <div class="stack" id="stack">
+      <div class="card" style="--r:-4deg"><img src="img/n2.jpg" alt="Agus y Guido comiendo hamburguesas sentados en el cordón"><div class="cap">Ensayo de la comida bajón ✔</div></div>
+      <div class="card" style="--r:3deg"><img src="img/n3.jpg" alt="Agus y Guido sentados con anteojos de sol y zapatillas"><div class="cap">Prueba de vestuario: aprobada</div></div>
+      <div class="card" style="--r:-2deg"><img src="img/n4.jpg" alt="Agus y Guido comiendo papas fritas"><div class="cap">Fin de fiesta (versión demo)</div></div>
+      <div class="card" style="--r:5deg"><img src="img/n1.jpg" alt="Agus levantando el ramo"><div class="cap">El ramo ya tiene dueña</div></div>
     </div>
-    <div style="position:absolute; right:14px; top:676px; transform:rotate(-6deg); font-family:'Permanent Marker',cursive; font-size:15px; line-height:1.3; color:#F2EBDD; text-align:right">El sí es nuestro.<br>La fiesta,<br>de todos.</div>
-  </section></div></div>
-<div class="band" style="background:#161616"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #161616; color: #F2EBDD; padding: 0 0 30px; position: relative; overflow: hidden">
-    <div style="padding: 40px 26px 0">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:4px; color:#B9B1A3">02 / EL PLAN</div>
-      <h2 style="margin: 10px 0 0; font-family:'Playfair Display',serif; font-style:italic; font-weight:500; font-size:54px; line-height:.95">¿Cuál es<br>el plan?</h2>
-      <div style="margin-top:8px"><svg aria-hidden="true" width="150" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style="display:block"><path d="M2 9 C40 3 90 12 130 6 C160 2 185 8 198 5" stroke="#C62420" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
-      <p style="margin: 14px 0 0; font-size: 16px; line-height: 1.45; color:#E6DECF">Disfrutar con familia, amigos, comida rica y mucha música</p>
+    <div class="stack-hint"><span>tocá la foto</span><div class="dots" id="dots"></div></div>
+  </div>
+</section>
+
+<!-- 3. EL PLAN -->
+<section id="plan">
+  <div class="pin">
+    <div class="wrap">
+      <div class="kicker" style="color:#9E9686">02 / El plan</div>
+      <h2>¿Cuál es <b>el plan?</b></h2>
+      <p class="lead">Disfrutar con familia, amigos, comida rica y mucha música.</p>
+      <div class="timeline">
+        <div class="flute" aria-hidden="true">
+          <div class="salud" id="salud">¡Salud!</div>
+          <svg viewBox="0 0 100 300">
+            <defs>
+              <clipPath id="bowl"><path d="M18 12 L82 12 C83 105 74 168 55 192 L45 192 C26 168 17 105 18 12 Z"/></clipPath>
+              <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE39A"/><stop offset="1" stop-color="#E9A52A"/></linearGradient>
+            </defs>
+            <g clip-path="url(#bowl)">
+              <rect id="liquid" x="0" y="192" width="100" height="200" fill="url(#liq)"/>
+              <rect id="foam" x="0" y="186" width="100" height="7" fill="#FFF6DA" opacity=".95"/>
+              <g id="bubbles"></g>
+            </g>
+            <path d="M18 12 L82 12 C83 105 74 168 55 192 L45 192 C26 168 17 105 18 12 Z" fill="none" stroke="#F4ECDD" stroke-width="3"/>
+            <path d="M28 22 C27 90 32 140 40 168" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+            <path d="M47 192 L47 268 M53 192 L53 268" stroke="#F4ECDD" stroke-width="3"/>
+            <ellipse cx="50" cy="274" rx="30" ry="7" fill="none" stroke="#F4ECDD" stroke-width="3"/>
+            <g id="ticks" stroke="#F4ECDD" stroke-width="2.5" stroke-linecap="round"></g>
+          </svg>
+        </div>
+        <div class="steps" id="steps">
+          <div class="step" data-at="0.12"><span class="t">17 HS</span><div class="n">Ceremonia</div><div class="d">Iniciaremos con alguna que otra cursilería</div></div>
+          <div class="step" data-at="0.38"><span class="t">18 HS</span><div class="n">Recepción</div><div class="d">Muuucha comida rica</div></div>
+          <div class="step" data-at="0.64"><span class="t">20 HS</span><div class="n">Fiesta</div><div class="d">Acá cambiate y ponete zapas, que queremos que disfrutes la noche</div></div>
+          <div class="step" data-at="0.90"><span class="t">01 HS</span><div class="n">Fin de fiesta</div><div class="d">Con comida bajón, obviamente</div></div>
+        </div>
+      </div>
+      <div class="plan-hint" id="planHint">seguí bajando para llenar la copa ↓</div>
     </div>
-    <div style="margin: 24px 22px 0; display:flex; flex-direction:column; gap:12px">
-      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#C62420">17HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Ceremonia</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Iniciaremos con alguna que otra cursilería</div></div></div>
-      <div style="height:1px; background:#3A3A3A"></div>
-      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#F2EBDD">18HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Recepción</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Muuucha comida rica</div></div></div>
-      <div style="height:1px; background:#3A3A3A"></div>
-      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#C62420">20HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Fiesta</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Acá cambiate y ponete zapas, que queremos que disfrutes la noche</div></div></div>
-      <div style="height:1px; background:#3A3A3A"></div>
-      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#F2EBDD">01HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Fin de fiesta</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Con comida bajón, obviamente</div></div></div>
-    </div>
-    <div style="position:absolute; right:-10px; bottom:26px; width:190px; background:#F2EBDD; color:#161616; clip-path:polygon(0.0% 0.4%,4.5% 0.8%,9.1% 0.6%,13.6% 0.0%,18.2% 0.0%,22.7% 0.4%,27.3% 0.4%,31.8% 1.1%,36.4% 1.5%,40.9% 0.7%,45.5% 1.5%,50.0% 1.6%,54.5% 1.5%,59.1% 0.6%,63.6% 0.4%,68.2% 0.4%,72.7% 0.3%,77.3% 0.3%,81.8% 1.0%,86.4% 1.4%,90.9% 1.3%,95.5% 0.8%,100.0% 1.0%,98.7% 4.5%,99.9% 9.1%,98.9% 13.6%,98.5% 18.2%,98.7% 22.7%,98.8% 27.3%,99.2% 31.8%,99.7% 36.4%,98.7% 40.9%,99.5% 45.5%,98.7% 50.0%,98.4% 54.5%,99.4% 59.1%,99.4% 63.6%,98.5% 68.2%,98.8% 72.7%,99.7% 77.3%,99.8% 81.8%,99.8% 86.4%,98.6% 90.9%,98.7% 95.5%,99.8% 100.0%,95.5% 98.7%,90.9% 98.4%,86.4% 98.9%,81.8% 99.4%,77.3% 99.1%,72.7% 99.8%,68.2% 100.0%,63.6% 98.4%,59.1% 99.0%,54.5% 99.2%,50.0% 98.5%,45.5% 99.3%,40.9% 98.6%,36.4% 98.7%,31.8% 99.7%,27.3% 99.6%,22.7% 99.5%,18.2% 99.6%,13.6% 99.1%,9.1% 99.6%,4.5% 99.3%,0.0% 99.8%,1.5% 95.5%,0.6% 90.9%,0.7% 86.4%,0.9% 81.8%,1.4% 77.3%,0.7% 72.7%,1.5% 68.2%,0.8% 63.6%,0.9% 59.1%,0.8% 54.5%,0.0% 50.0%,0.7% 45.5%,0.3% 40.9%,0.0% 36.4%,1.3% 31.8%,0.3% 27.3%,0.8% 22.7%,1.2% 18.2%,0.9% 13.6%,0.5% 9.1%,0.8% 4.5%); padding:14px 16px; transform:rotate(-5deg)">
-      <div style="font-family:'Permanent Marker',cursive; font-size:17px; line-height:1.25">Misma gente.<br>Más historias.</div>
-    </div>
-  </section></div></div>
-<div class="band" style="background:#F2EBDD"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #F2EBDD; padding: 34px 20px 24px; display:flex; flex-direction:column; gap:13px; position:relative; overflow:hidden">
-    <div style="display:flex; align-items:flex-end; gap:10px">
-      <h2 style="margin:0; font-family:'Anton',sans-serif; font-weight:400; font-size:58px; line-height:.9">DETALLES</h2>
-    </div>
-    <div style="margin:-6px 0 4px 8px; font-family:'Mrs Saint Delafield',cursive; font-size:40px; line-height:1; color:#C62420; transform:rotate(-3deg)">a tener en cuenta</div>
-    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.9%,4.5% 1.3%,9.1% 0.2%,13.6% 0.9%,18.2% 0.4%,22.7% 0.4%,27.3% 1.2%,31.8% 0.8%,36.4% 0.9%,40.9% 1.2%,45.5% 1.5%,50.0% 0.7%,54.5% 1.0%,59.1% 0.8%,63.6% 0.8%,68.2% 1.1%,72.7% 0.7%,77.3% 0.9%,81.8% 0.8%,86.4% 1.5%,90.9% 1.1%,95.5% 1.4%,100.0% 1.5%,99.6% 4.5%,99.1% 9.1%,98.5% 13.6%,98.7% 18.2%,99.8% 22.7%,99.8% 27.3%,99.3% 31.8%,99.9% 36.4%,99.6% 40.9%,99.9% 45.5%,98.9% 50.0%,98.7% 54.5%,98.6% 59.1%,99.8% 63.6%,98.9% 68.2%,98.9% 72.7%,99.8% 77.3%,98.6% 81.8%,98.5% 86.4%,99.6% 90.9%,98.5% 95.5%,99.4% 100.0%,95.5% 99.2%,90.9% 98.4%,86.4% 98.7%,81.8% 99.7%,77.3% 99.3%,72.7% 99.2%,68.2% 99.5%,63.6% 99.7%,59.1% 99.5%,54.5% 98.8%,50.0% 100.0%,45.5% 99.1%,40.9% 99.3%,36.4% 100.0%,31.8% 99.5%,27.3% 99.0%,22.7% 99.2%,18.2% 99.9%,13.6% 98.4%,9.1% 98.7%,4.5% 98.4%,0.0% 99.8%,0.4% 95.5%,0.1% 90.9%,1.2% 86.4%,0.4% 81.8%,0.2% 77.3%,0.7% 72.7%,1.5% 68.2%,1.3% 63.6%,0.4% 59.1%,0.2% 54.5%,1.5% 50.0%,0.9% 45.5%,1.1% 40.9%,0.1% 36.4%,0.1% 31.8%,1.1% 27.3%,0.7% 22.7%,0.1% 18.2%,1.5% 13.6%,1.0% 9.1%,1.3% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">TRASLADOS</div>
-      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">El salón tiene estacionamiento privado si querés ir con tu auto. ¿Querés tomar tranquilo sin pensar en la vuelta? Cerca de la fecha vamos a organizar remises puerta a puerta o combis por zona. Anotate cuando confirmes y nuestra planner te va a contactar.</p><div style="display:flex; gap:8px; margin-top:10px">
-        <a target="_blank" rel="noopener" href="https://waze.com/ul?ll=-34.4491547,-58.840288&amp;navigate=yes" style="flex:1; text-align:center; text-decoration:none; background:#161616; color:#F2EBDD; font-weight:600; font-size:13px; padding:12px 6px">Ir con Waze</a>
-        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=La+Herencia+Eventos" style="flex:1; text-align:center; text-decoration:none; background:#C62420; color:#FFFFFF; font-weight:600; font-size:13px; padding:12px 6px">Google Maps</a>
+  </div>
+</section>
+
+<!-- 4. DETALLES -->
+<section id="detalles" class="grain">
+  <div class="wrap">
+    <figure class="det-photo reveal" style="--r:7deg;margin:0"><span class="tape"></span><img src="img/n3.jpg" alt=""></figure>
+    <div class="kicker reveal">03 / Detalles</div>
+    <h2 class="big reveal">Por las<br>dudas</h2>
+    <div class="firma reveal">tocá lo que quieras saber</div>
+    <div class="faq" id="faq">
+      <div class="q reveal" style="--r:-1deg">
+        <button aria-expanded="false"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.5-6h9L18 17M7 17v2M17 17v2"/><circle cx="8" cy="14" r=".6"/><circle cx="16" cy="14" r=".6"/></svg></span><span class="lbl">¿Cómo llego y cómo vuelvo?<small>Traslados y ubicación</small></span><span class="plus">+</span></button>
+        <div class="ans"><div>
+          <p>El salón tiene estacionamiento privado si querés ir con tu auto.</p>
+          <p style="margin-top:8px">¿Querés tomar tranquilo sin pensar en la vuelta? Cerca de la fecha vamos a organizar <b>remises puerta a puerta o combis por zona</b>. Anotate cuando confirmes y nuestra planner te va a contactar.</p>
+          <div class="btns"><a class="pill k" target="_blank" rel="noopener" href="https://waze.com/ul?ll=-34.4491547,-58.840288&amp;navigate=yes">Ir con Waze</a><a class="pill r" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=La+Herencia+Eventos">Google Maps</a></div>
+          <div class="pad"></div>
+        </div></div>
+      </div>
+      <div class="q reveal" style="--r:1.2deg">
+        <button aria-expanded="false"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 3 4-3 4 4-3 3v11H7V10L4 7z"/></svg></span><span class="lbl">¿Qué me pongo?<small>Dress code</small></span><span class="plus">+</span></button>
+        <div class="ans"><div>
+          <p><b>Elegante.</b> Los colores blanco, beige, nude y bordó quedan reservados para los novios.</p>
+          <div class="colors"><i style="background:#fff"></i><i style="background:#E8DCC4"></i><i style="background:#E3BFA8"></i><i style="background:#6B1E2A"></i><span>para nosotros</span></div>
+          <div class="pad"></div>
+        </div></div>
+      </div>
+      <div class="q reveal" style="--r:-1.5deg">
+        <button aria-expanded="false"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8v6M14 11h6"/></svg></span><span class="lbl">¿Puedo ir con alguien o con chicos?<small>Invitaciones</small></span><span class="plus">+</span></button>
+        <div class="ans"><div>
+          <p>Las invitaciones son personales y esta vez la fiesta es solo para adultos. ¡Gracias por entender!</p>
+          <div class="pad"></div>
+        </div></div>
+      </div>
+      <div class="q reveal" style="--r:.8deg">
+        <button aria-expanded="false"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 8h10"/></svg></span><span class="lbl">Es Viernes Santo y no como carne<small>¿Qué hago?</small></span><span class="plus">+</span></button>
+        <div class="ans"><div>
+          <p>Cuando confirmes, elegí la opción <b>vegetariana</b>. ¡Vas a comer riquísimo igual!</p>
+          <div class="pad"></div>
+        </div></div>
+      </div>
+      <div class="q reveal" style="--r:-.8deg">
+        <button aria-expanded="false"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 3c-2 0-3 2.5-3 6s1 4 3 4v8"/></svg></span><span class="lbl">Tengo una restricción alimentaria<small>Celíaco, vegano, alergias…</small></span><span class="plus">+</span></button>
+        <div class="ans"><div>
+          <p>Aclarala en el formulario de confirmación y el catering arma todo lo que necesites.</p>
+          <div class="pad"></div>
+        </div></div>
       </div>
     </div>
-    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.1%,4.5% 1.4%,9.1% 0.1%,13.6% 1.4%,18.2% 0.7%,22.7% 0.5%,27.3% 0.9%,31.8% 1.5%,36.4% 0.4%,40.9% 0.2%,45.5% 0.8%,50.0% 0.4%,54.5% 0.2%,59.1% 0.3%,63.6% 0.1%,68.2% 0.3%,72.7% 0.5%,77.3% 0.5%,81.8% 1.2%,86.4% 0.5%,90.9% 0.8%,95.5% 0.3%,100.0% 0.6%,100.0% 4.5%,99.6% 9.1%,100.0% 13.6%,98.8% 18.2%,99.1% 22.7%,99.7% 27.3%,99.2% 31.8%,98.5% 36.4%,99.8% 40.9%,98.7% 45.5%,99.3% 50.0%,99.2% 54.5%,98.7% 59.1%,99.4% 63.6%,99.2% 68.2%,98.9% 72.7%,98.4% 77.3%,99.5% 81.8%,98.7% 86.4%,98.9% 90.9%,99.0% 95.5%,99.4% 100.0%,95.5% 99.4%,90.9% 99.9%,86.4% 99.8%,81.8% 99.9%,77.3% 98.8%,72.7% 99.6%,68.2% 99.7%,63.6% 99.9%,59.1% 98.7%,54.5% 98.6%,50.0% 98.9%,45.5% 99.5%,40.9% 99.6%,36.4% 99.5%,31.8% 99.3%,27.3% 99.7%,22.7% 99.3%,18.2% 99.6%,13.6% 98.5%,9.1% 98.4%,4.5% 99.1%,0.0% 99.6%,1.5% 95.5%,0.5% 90.9%,0.6% 86.4%,0.0% 81.8%,0.6% 77.3%,0.8% 72.7%,0.8% 68.2%,0.3% 63.6%,0.8% 59.1%,0.0% 54.5%,0.4% 50.0%,0.1% 45.5%,0.6% 40.9%,0.1% 36.4%,0.0% 31.8%,0.5% 27.3%,0.4% 22.7%,0.9% 18.2%,0.8% 13.6%,1.2% 9.1%,1.1% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">DRESS CODE</div>
-      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4"><b>Elegante.</b> Blanco, beige, nude y bordó quedan reservados para los novios.</p>
+  </div>
+</section>
+
+<!-- 5. CONFIRMACIÓN -->
+<section id="confirmar">
+  <div class="bg" role="img" aria-label="Agus y Guido brindando"></div>
+  <div class="shade"></div>
+  <div class="wrap">
+    <h2 class="big venis reveal">¿Venís?</h2>
+    <p class="cuando reveal">Te esperamos el <b>26.03.2027</b> a las 17 hs en <i>“La Herencia”</i></p>
+    <div class="cta reveal">
+      <button class="si" data-rsvp="Sí">¡Obvio que voy!</button>
+      <button class="no" data-rsvp="No">No puedo</button>
     </div>
-    <div style="background:#FBF7EE; clip-path:polygon(0.0% 1.1%,4.5% 1.4%,9.1% 0.6%,13.6% 0.5%,18.2% 1.6%,22.7% 0.2%,27.3% 1.2%,31.8% 1.0%,36.4% 0.1%,40.9% 1.3%,45.5% 1.4%,50.0% 1.0%,54.5% 1.2%,59.1% 1.3%,63.6% 0.2%,68.2% 0.8%,72.7% 0.8%,77.3% 1.3%,81.8% 1.3%,86.4% 1.3%,90.9% 0.9%,95.5% 1.4%,100.0% 1.1%,98.9% 4.5%,99.6% 9.1%,100.0% 13.6%,99.8% 18.2%,99.4% 22.7%,99.8% 27.3%,98.7% 31.8%,99.1% 36.4%,99.0% 40.9%,99.0% 45.5%,98.9% 50.0%,99.2% 54.5%,100.0% 59.1%,98.7% 63.6%,98.8% 68.2%,99.2% 72.7%,99.1% 77.3%,98.9% 81.8%,99.9% 86.4%,98.8% 90.9%,99.6% 95.5%,99.9% 100.0%,95.5% 99.6%,90.9% 98.8%,86.4% 99.7%,81.8% 98.8%,77.3% 98.4%,72.7% 99.2%,68.2% 99.4%,63.6% 99.2%,59.1% 98.9%,54.5% 98.8%,50.0% 99.0%,45.5% 99.0%,40.9% 99.9%,36.4% 99.8%,31.8% 99.6%,27.3% 98.8%,22.7% 99.5%,18.2% 99.1%,13.6% 100.0%,9.1% 99.9%,4.5% 99.6%,0.0% 98.9%,1.1% 95.5%,1.1% 90.9%,0.5% 86.4%,0.8% 81.8%,0.7% 77.3%,0.7% 72.7%,0.2% 68.2%,1.4% 63.6%,0.3% 59.1%,1.6% 54.5%,1.5% 50.0%,0.0% 45.5%,0.7% 40.9%,1.3% 36.4%,1.5% 31.8%,0.7% 27.3%,0.4% 22.7%,0.3% 18.2%,1.5% 13.6%,0.3% 9.1%,0.9% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">¿PUEDO IR CON ACOMPAÑANTE O CHICOS?</div>
-      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">Las invitaciones son personales y esta vez la fiesta es solo para adultos. ¡Gracias por entender!</p>
+    <div class="count reveal">
+      <div class="num" id="dias">—</div>
+      <div class="txt">días para confirmar.<br><span>¡No nos dejes esperando!</span></div>
     </div>
-    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.2%,4.5% 0.8%,9.1% 1.5%,13.6% 0.2%,18.2% 1.3%,22.7% 0.8%,27.3% 1.4%,31.8% 1.1%,36.4% 0.4%,40.9% 1.4%,45.5% 0.8%,50.0% 0.0%,54.5% 0.0%,59.1% 0.8%,63.6% 0.7%,68.2% 0.5%,72.7% 0.2%,77.3% 0.6%,81.8% 0.5%,86.4% 1.3%,90.9% 0.0%,95.5% 1.2%,100.0% 1.3%,99.8% 4.5%,98.5% 9.1%,98.9% 13.6%,98.6% 18.2%,99.5% 22.7%,99.4% 27.3%,99.4% 31.8%,98.4% 36.4%,99.1% 40.9%,99.4% 45.5%,99.3% 50.0%,99.6% 54.5%,99.9% 59.1%,99.8% 63.6%,98.7% 68.2%,99.5% 72.7%,98.5% 77.3%,99.6% 81.8%,99.6% 86.4%,99.2% 90.9%,99.7% 95.5%,99.4% 100.0%,95.5% 98.5%,90.9% 98.6%,86.4% 98.7%,81.8% 99.0%,77.3% 98.5%,72.7% 98.5%,68.2% 99.1%,63.6% 98.8%,59.1% 99.9%,54.5% 98.8%,50.0% 99.3%,45.5% 98.8%,40.9% 99.0%,36.4% 99.5%,31.8% 99.9%,27.3% 98.5%,22.7% 99.8%,18.2% 99.2%,13.6% 99.5%,9.1% 99.5%,4.5% 98.8%,0.0% 98.4%,0.4% 95.5%,1.0% 90.9%,0.5% 86.4%,0.9% 81.8%,0.6% 77.3%,0.3% 72.7%,0.3% 68.2%,0.3% 63.6%,1.4% 59.1%,0.8% 54.5%,0.4% 50.0%,1.5% 45.5%,1.6% 40.9%,0.7% 36.4%,0.2% 31.8%,0.3% 27.3%,0.1% 22.7%,0.5% 18.2%,0.1% 13.6%,0.4% 9.1%,0.4% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">ES VIERNES SANTO Y NO COMO CARNE</div>
-      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">En el formulario elegí la opción vegetariana. ¡Vas a comer riquísimo igual!</p>
+    <div class="closing">
+      <div class="marker">¡Te esperamos!</div>
+      <div class="firma">Agus &amp; Guido</div>
     </div>
-    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.9%,4.5% 1.4%,9.1% 1.2%,13.6% 0.7%,18.2% 0.7%,22.7% 0.8%,27.3% 0.6%,31.8% 0.5%,36.4% 0.1%,40.9% 0.4%,45.5% 1.5%,50.0% 0.2%,54.5% 0.8%,59.1% 1.0%,63.6% 1.4%,68.2% 0.3%,72.7% 0.4%,77.3% 0.4%,81.8% 0.6%,86.4% 0.7%,90.9% 1.5%,95.5% 1.4%,100.0% 1.4%,100.0% 4.5%,99.9% 9.1%,98.9% 13.6%,98.6% 18.2%,99.2% 22.7%,99.1% 27.3%,100.0% 31.8%,99.4% 36.4%,98.5% 40.9%,98.7% 45.5%,98.6% 50.0%,98.4% 54.5%,99.6% 59.1%,99.8% 63.6%,99.8% 68.2%,99.2% 72.7%,98.9% 77.3%,98.5% 81.8%,98.8% 86.4%,99.0% 90.9%,98.8% 95.5%,99.3% 100.0%,95.5% 99.1%,90.9% 99.9%,86.4% 98.7%,81.8% 99.6%,77.3% 98.5%,72.7% 99.0%,68.2% 99.5%,63.6% 99.8%,59.1% 99.6%,54.5% 99.0%,50.0% 98.9%,45.5% 99.8%,40.9% 99.9%,36.4% 99.2%,31.8% 99.1%,27.3% 99.4%,22.7% 99.6%,18.2% 99.0%,13.6% 100.0%,9.1% 99.5%,4.5% 99.3%,0.0% 98.5%,1.0% 95.5%,1.4% 90.9%,0.8% 86.4%,0.4% 81.8%,0.4% 77.3%,1.5% 72.7%,1.1% 68.2%,0.5% 63.6%,0.0% 59.1%,0.8% 54.5%,1.1% 50.0%,0.7% 45.5%,0.4% 40.9%,1.1% 36.4%,1.5% 31.8%,0.4% 27.3%,0.1% 22.7%,0.5% 18.2%,0.7% 13.6%,1.1% 9.1%,0.3% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">¿RESTRICCIÓN ALIMENTARIA?</div>
-      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">Aclarala en el formulario y el catering arma todo lo que necesites.</p>
-    </div>
-  </section></div></div>
-<div class="band" style="background:linear-gradient(#4A1317 0 88%,#F2EBDD 88%)"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #4A1317; color: #F2EBDD; position: relative; overflow: hidden">
-    <img src="img/tel.png" alt="" style="position:absolute; right:0; top:18px; width:112px; -webkit-mask-image:radial-gradient(ellipse 70% 60% at 55% 50%, #000 60%, transparent 100%); mask-image:radial-gradient(ellipse 70% 60% at 55% 50%, #000 60%, transparent 100%)">
-    <h2 id="saludo" style="position:absolute; left:24px; top:40px; margin:0; width:250px; font-family:'Playfair Display',serif; font-weight:500; font-size:52px; line-height:.95">Queremos<br>que estés.</h2>
-    <div style="position:absolute; left:26px; top:150px"><svg aria-hidden="true" width="140" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style="display:block"><path d="M2 9 C40 3 90 12 130 6 C160 2 185 8 198 5" stroke="#C62420" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
-    <div style="position:absolute; left:28px; top:196px; width:196px; height:236px; background:#FBF7EE; padding:9px 9px 26px; box-sizing:border-box; clip-path:polygon(0.0% 1.3%,4.5% 1.2%,9.1% 0.8%,13.6% 0.3%,18.2% 1.6%,22.7% 0.5%,27.3% 1.3%,31.8% 0.4%,36.4% 0.4%,40.9% 1.2%,45.5% 0.5%,50.0% 1.5%,54.5% 0.8%,59.1% 0.3%,63.6% 0.4%,68.2% 0.7%,72.7% 1.1%,77.3% 1.5%,81.8% 0.2%,86.4% 0.6%,90.9% 0.3%,95.5% 1.6%,100.0% 0.2%,99.9% 4.5%,99.9% 9.1%,99.4% 13.6%,98.6% 18.2%,98.6% 22.7%,98.8% 27.3%,98.4% 31.8%,98.5% 36.4%,99.5% 40.9%,99.7% 45.5%,98.5% 50.0%,98.8% 54.5%,99.9% 59.1%,98.9% 63.6%,99.4% 68.2%,99.4% 72.7%,99.5% 77.3%,99.7% 81.8%,100.0% 86.4%,99.6% 90.9%,99.4% 95.5%,98.5% 100.0%,95.5% 99.8%,90.9% 98.5%,86.4% 99.7%,81.8% 99.4%,77.3% 98.7%,72.7% 98.7%,68.2% 99.3%,63.6% 99.9%,59.1% 99.2%,54.5% 99.4%,50.0% 98.5%,45.5% 99.7%,40.9% 99.4%,36.4% 98.6%,31.8% 100.0%,27.3% 99.3%,22.7% 98.7%,18.2% 98.8%,13.6% 99.9%,9.1% 99.9%,4.5% 99.9%,0.0% 98.5%,0.4% 95.5%,1.2% 90.9%,1.4% 86.4%,0.5% 81.8%,0.4% 77.3%,1.5% 72.7%,1.0% 68.2%,0.4% 63.6%,1.1% 59.1%,0.5% 54.5%,0.4% 50.0%,0.0% 45.5%,1.2% 40.9%,1.5% 36.4%,1.0% 31.8%,1.5% 27.3%,0.0% 22.7%,0.4% 18.2%,0.8% 13.6%,1.5% 9.1%,1.5% 4.5%); transform:rotate(3deg)">
-      <img src="../fotos/15.jpg" alt="Agus y Guido entre tulipanes" style="width:100%; height:100%; object-fit:cover; display:block">
-    </div>
-    <div style="position:absolute; left:0; right:0; top:462px; text-align:center">
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:13px; letter-spacing:4px">TE ESPERAMOS EL</div>
-      <div style="font-family:'Anton',sans-serif; font-size:60px; line-height:1.05; color:#F2EBDD">26.03.2027</div>
-      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:13px; letter-spacing:4px">A LAS 17 HS EN <span style="font-family:'Playfair Display',serif; font-style:italic; font-weight:500; font-size:19px; letter-spacing:0">“La Herencia”</span></div>
-      <button type="button" class="openRsvp" style="border:0; cursor:pointer; font-family:inherit; margin-top:20px; display:inline-block; text-decoration:none; background:#C62420; color:#FFFFFF; font-weight:600; font-size:17px; padding:17px 40px">Confirmar asistencia</button>
-      <div style="margin-top:12px; font-size:14px; color:#E6DECF">Quedan <b style="color:#FFFFFF"><span class="dias">—</span> días</b> para confirmar</div>
-    </div>
-    <div style="position:absolute; left:0; top:720px; width:390px"><svg aria-hidden="true" width="390" height="40" viewBox="0 0 390 40" style="display:block" preserveAspectRatio="none"><path d="M0 40 L0.0 18.0 L11.2 17.7 L18.4 14.9 L31.7 27.9 L38.1 21.2 L51.6 10.8 L66.0 12.4 L78.0 21.0 L90.3 16.1 L100.5 21.7 L110.7 23.2 L121.2 18.8 L127.5 22.4 L138.3 14.7 L152.0 25.6 L162.6 13.6 L173.3 12.1 L180.6 18.6 L187.5 18.8 L198.6 10.8 L211.0 11.6 L224.3 25.6 L235.4 11.1 L246.5 17.6 L262.0 12.7 L276.5 29.9 L289.9 26.3 L297.8 29.6 L308.7 29.1 L323.9 13.3 L337.8 28.6 L344.4 17.0 L358.0 13.2 L372.9 15.5 L387.1 12.9 L390.0 28.4 L390 40 Z" fill="#F2EBDD"></path></svg></div>
-    <div style="position:absolute; left:0; top:758px; width:390px; height:86px; background:#F2EBDD"></div>
-    <div style="position:absolute; left:0; right:0; top:744px; text-align:center; color:#161616">
-      <div style="font-family:'Permanent Marker',cursive; font-size:24px; color:#C62420">¡Te esperamos!</div>
-      <div style="font-family:'Mrs Saint Delafield',cursive; font-size:44px; line-height:1">Agus &amp; Guido</div>
-    </div>
-  </section></div></div>
+  </div>
+</section>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-  <div class="paper">
-    <button class="x" id="closeSheet" aria-label="Cerrar">×</button>
-    <h3 id="sheetTitle">¿VENÍS<br><em>A LA FIESTA?</em></h3>
-    <div class="firma">confirmá antes del 30/11</div>
-    <div id="panel"></div>
+  <div class="ticket">
+    <div class="head">
+      <button class="x" id="closeSheet" aria-label="Cerrar">×</button>
+      <div class="kicker">Pase · 26.03.2027 · La Herencia</div>
+      <h3 id="sheetTitle">Tu lugar<br>en la fiesta</h3>
+    </div>
+    <div class="body" id="panel"></div>
   </div>
 </div>
+
 <script>
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const C = CONFIG;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* escala: cada pantalla entra completa en el celu */
-  const fit = () => { const s = Math.min(innerWidth / 390, innerHeight / 844, 1.25); document.documentElement.style.setProperty("--s", s.toFixed(4)); };
-  let lastW = 0; const onR = () => { if (Math.abs(innerWidth - lastW) > 2 || !lastW) { lastW = innerWidth; fit(); } };
-  onR(); addEventListener("resize", onR); addEventListener("orientationchange", () => setTimeout(fit, 200));
+  /* --- portada: letras que saltan --- */
+  let k = 0;
+  $$("[data-split]").forEach(el => { el.innerHTML = [...el.textContent].map(ch => `<span class="ch" style="animation-delay:${(0.35 + (k++) * 0.05).toFixed(2)}s">${ch === " " ? "&nbsp;" : esc(ch)}</span>`).join(""); });
+  const tk = `<span>El sí es nuestro</span><i>✶</i><span>La fiesta, de todos</span><i>✶</i><span>26.03.2027</span><i>✶</i><span>La Herencia</span><i>✶</i>`;
+  $("#ticker").innerHTML = tk.repeat(6);
 
-  /* cuenta regresiva para confirmar */
+  /* --- aparecer al scrollear --- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
+  $$(".reveal").forEach((el, i) => { el.style.transitionDelay = `${(i % 5) * 60}ms`; io.observe(el); });
+
+  /* --- pila de fotos --- */
+  const stack = $("#stack"); let cards = $$(".card", stack);
+  const dots = $("#dots"); dots.innerHTML = cards.map(() => "<i></i>").join("");
+  let shown = 0;
+  const layout = () => { cards.forEach((c, i) => { c.style.zIndex = cards.length - i; c.style.transform = `translate(${i * 6}px, ${i * 4}px) rotate(${c.style.getPropertyValue("--r")})`; }); [...dots.children].forEach((d, i) => d.classList.toggle("on", i === shown % cards.length)); };
+  layout();
+  const next = () => { const top = cards[0]; top.classList.add("fly"); setTimeout(() => { top.classList.remove("fly"); cards.push(cards.shift()); shown++; layout(); }, 380); };
+  stack.addEventListener("click", next);
+  let sx = null; stack.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
+  stack.addEventListener("touchend", e => { if (sx !== null && Math.abs(e.changedTouches[0].clientX - sx) > 40) { e.preventDefault(); next(); } sx = null; });
+
+  /* --- copa de champagne --- */
+  const liquid = $("#liquid"), foam = $("#foam"), steps = $$(".step"), salud = $("#salud"), hint = $("#planHint"), plan = $("#plan");
+  const TOP = 14, BOT = 192;
+  // posiciones de cada paso alineadas con el nivel de la copa
+  const placeSteps = () => { steps.forEach(s => { const at = +s.dataset.at; s.style.bottom = `${(at * (BOT - TOP) + (300 - BOT)) / 300 * 100}%`; }); };
+  const ticks = $("#ticks"); if (0) ticks.innerHTML = steps.map(s => { const y = BOT - (+s.dataset.at) * (BOT - TOP); return `<line x1="84" y1="${y}" x2="96" y2="${y}"/>`; }).join("");
+  // burbujas
+  const bub = $("#bubbles"); let bh = "";
+  for (let i = 0; i < 14; i++) { const x = 30 + Math.random() * 40, r = 1 + Math.random() * 2, d = 2 + Math.random() * 3, dl = Math.random() * 4; bh += `<circle cx="${x.toFixed(1)}" cy="200" r="${r.toFixed(1)}" fill="#FFF8E0" opacity=".85"><animate attributeName="cy" from="196" to="10" dur="${d.toFixed(1)}s" begin="${dl.toFixed(1)}s" repeatCount="indefinite"/></circle>`; }
+  bub.innerHTML = bh;
+  let lvl = -1;
+  const setLevel = p => {
+    p = Math.max(0, Math.min(1, p)); if (Math.abs(p - lvl) < .002) return; lvl = p;
+    const y = BOT - p * (BOT - TOP);
+    liquid.setAttribute("y", y.toFixed(1)); foam.setAttribute("y", (y - 6).toFixed(1)); foam.setAttribute("opacity", p > .02 ? .95 : 0);
+    steps.forEach(s => s.classList.toggle("on", p >= +s.dataset.at - .04));
+    salud.classList.toggle("on", p >= .985);
+    hint.style.opacity = p > .9 ? 0 : 1;
+  };
+  const onScroll = () => { const r = plan.getBoundingClientRect(); const span = r.height - innerHeight; setLevel(span > 0 ? (-r.top) / (span * .92) : 1); };
+  if (reduce) setLevel(1); else { addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); onScroll(); }
+
+  /* --- preguntas desplegables --- */
+  $$(".q").forEach(q => { const b = $("button", q); b.onclick = () => { const open = !q.classList.contains("open"); $$(".q.open").forEach(o => { o.classList.remove("open"); $("button", o).setAttribute("aria-expanded", "false"); }); if (open) { q.classList.add("open"); b.setAttribute("aria-expanded", "true"); } }; });
+
+  /* --- cuenta regresiva --- */
   const dias = Math.max(0, Math.ceil((new Date(C.limiteRSVP) - Date.now()) / 864e5));
-  document.querySelectorAll(".dias").forEach(e => e.textContent = dias);
+  const dEl = $("#dias");
+  const ioD = new IntersectionObserver(es => { if (!es[0].isIntersecting) return; ioD.disconnect(); if (reduce) { dEl.textContent = dias; return; } let n = 0; const t0 = performance.now(); const f = t => { const p = Math.min(1, (t - t0) / 1100); n = Math.round(dias * (1 - Math.pow(1 - p, 3))); dEl.textContent = n; if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }, { threshold: .5 });
+  ioD.observe(dEl);
 
-  /* API */
+  /* --- confetti --- */
+  const confetti = () => { if (reduce) return; const cols = ["#D7261E", "#F4B63C", "#F4ECDD", "#FFD978", "#121212"]; for (let i = 0; i < 90; i++) { const c = document.createElement("i"); c.className = "conf"; c.style.left = Math.random() * 100 + "vw"; c.style.background = cols[i % cols.length]; c.style.setProperty("--dx", (Math.random() * 160 - 80) + "px"); c.style.setProperty("--rot", (Math.random() * 900 - 450) + "deg"); c.style.animationDuration = (1.8 + Math.random() * 1.6) + "s"; c.style.animationDelay = (Math.random() * .4) + "s"; if (i % 3 === 0) c.style.borderRadius = "50%"; document.body.appendChild(c); setTimeout(() => c.remove(), 4200); } };
+
+  /* --- API --- */
   const apiGet = async code => (await fetch(`${C.apiUrl}?action=invite&code=${encodeURIComponent(code)}`)).json();
   const apiPost = async p => (await fetch(C.apiUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(p) })).json();
 
   const sheet = $("#sheet"), panel = $("#panel");
-  let inv = null, loading = null;
-  const open = () => { sheet.classList.add("open"); document.body.style.overflow = "hidden"; if (!loading) inv ? (inv.respuesta ? renderDone(inv.respuesta, true) : renderForm()) : renderCode(); };
+  let inv = null, loading = null, wanted = null;
+  const open = pref => {
+    wanted = pref || null;
+    sheet.classList.add("open"); document.body.style.overflow = "hidden";
+    if (pref === "Sí") confetti();
+    if (loading) { panel.innerHTML = `<p>Buscando tu invitación…</p>`; return; }
+    inv ? (inv.respuesta && !pref ? renderDone(inv.respuesta, true) : renderForm()) : renderCode();
+  };
   const close = () => { sheet.classList.remove("open"); document.body.style.overflow = ""; };
-  document.querySelectorAll(".openRsvp").forEach(b => b.onclick = open);
+  $$("[data-rsvp]").forEach(b => b.onclick = () => open(b.dataset.rsvp));
   $("#closeSheet").onclick = close;
   sheet.addEventListener("click", e => { if (e.target === sheet) close(); });
   document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
@@ -212,7 +485,7 @@ html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-u
   function renderCode(error) {
     inv = null;
     panel.innerHTML = `<form id="codeForm">
-      <div class="field"><label class="lbl" for="code">Tu código de invitación</label>
+      <div class="field"><label class="lb" for="code">Tu código de invitación</label>
         <div class="code-box"><input id="code" autocomplete="off" required maxlength="10" placeholder="K7Q2M"><button class="btn" type="submit">Entrar</button></div></div>
       <p class="small" style="margin:0">Está en el mensaje que te mandamos por WhatsApp. Si entraste con tu link, no hace falta.</p>
       ${error ? `<div class="msg">${esc(error)}</div>` : ""}</form>`;
@@ -220,8 +493,7 @@ html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-u
   }
 
   function saludar(nombre) {
-    const n = esc(nombre.split(" ")[0]).toUpperCase();
-    const h = $("#hola"); if (h && !h.dataset.done) { h.dataset.done = 1; h.innerHTML = `<span style="color:#C62420">HOLA, ${n}:</span><br>` + h.innerHTML; h.style.top = "282px"; }
+    const h = $("#hola"); h.textContent = `¡Hola, ${nombre.split(" ")[0]}!`; h.hidden = false;
   }
 
   async function load(code, show) {
@@ -230,12 +502,12 @@ html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-u
     try {
       const d = await apiGet(code);
       loading = null;
-      if (!d.ok) { if (show) renderCode(d.error || "No encontramos ese código. Revisá el mensaje que te mandamos."); return; }
+      if (!d.ok) { if (show || sheet.classList.contains("open")) renderCode(d.error || "No encontramos ese código. Revisá el mensaje que te mandamos."); return; }
       inv = d;
       try { localStorage.setItem("rsvp_code", code); } catch (_) {}
       try { const u = new URL(location.href); u.searchParams.set("c", code); history.replaceState(null, "", u); } catch (_) {}
       saludar(d.nombre);
-      if (show || sheet.classList.contains("open")) d.respuesta ? renderDone(d.respuesta, true) : renderForm();
+      if (show || sheet.classList.contains("open")) (d.respuesta && !wanted) ? renderDone(d.respuesta, true) : renderForm();
     } catch (err) {
       loading = null;
       if (show || sheet.classList.contains("open")) renderCode("No pudimos conectarnos. Revisá tu conexión y probá de nuevo.");
@@ -244,27 +516,28 @@ html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-u
 
   function renderForm() {
     const p = inv.respuesta || {}, first = esc(inv.nombre.split(" ")[0]), menu = p.menu || "Sin restricciones";
+    const asiste = wanted || p.asiste;
     panel.innerHTML = `<form id="rsvpForm" novalidate>
-      <p style="margin:0 0 16px;font-size:17px">¡Hola, <b>${first}</b>! ¿Venís el ${esc(C.fechaTexto)}?</p>
+      <p class="hey">¡Hola, ${first}!</p>
       <div class="choice" role="radiogroup" aria-label="¿Venís?">
-        <input type="radio" id="si" name="asiste" value="Sí" ${p.asiste === "Sí" ? "checked" : ""}><label class="si" for="si"><b>¡VOY!</b><span>No me lo pierdo</span></label>
-        <input type="radio" id="no" name="asiste" value="No" ${p.asiste === "No" ? "checked" : ""}><label class="no" for="no"><b>NO PUEDO</b><span>Brindo desde lejos</span></label>
+        <input type="radio" id="si" name="asiste" value="Sí" ${asiste === "Sí" ? "checked" : ""}><label class="si" for="si"><b>¡Voy!</b><span>No me lo pierdo</span></label>
+        <input type="radio" id="no" name="asiste" value="No" ${asiste === "No" ? "checked" : ""}><label class="no" for="no"><b>No puedo</b><span>Brindo desde lejos</span></label>
       </div>
-      <div class="details" id="det" ${p.asiste === "Sí" ? "" : "hidden"}>
-        <div class="field"><span class="lbl" id="menuLbl">¿Qué menú preferís?</span>
+      <div class="details" id="det" ${asiste === "Sí" ? "" : "hidden"}>
+        <div class="field"><span class="lb" id="menuLbl">¿Qué menú preferís?</span>
           <div class="chips" role="radiogroup" aria-labelledby="menuLbl">${MENUS.map((m, i) => `<input type="radio" name="menu" id="m${i}" value="${m}" ${menu === m ? "checked" : ""}><label for="m${i}">${m}</label>`).join("")}</div>
           <div class="nota"><b>Es Viernes Santo.</b> Si no comés carne ese día, elegí <b>Vegetariano</b>. ¡Vas a comer riquísimo igual!</div></div>
-        <div class="field"><label class="lbl" for="alergias">¿Alguna alergia u otra restricción?</label><input id="alergias" name="alergias" value="${esc(p.alergias || "")}" placeholder="Ej: alergia a los frutos secos"></div>
-        <div class="field"><span class="lbl">Traslados</span>
+        <div class="field"><label class="lb" for="alergias">¿Alguna alergia u otra restricción?</label><input id="alergias" name="alergias" value="${esc(p.alergias || "")}" placeholder="Ej: alergia a los frutos secos"></div>
+        <div class="field"><span class="lb">Traslados</span>
           <label class="check"><input type="checkbox" name="traslado" ${p.traslado ? "checked" : ""}><span>Vamos a organizar remises puerta a puerta o combis por zona. <b>¿Querés sumarte?</b> Nuestra planner te va a contactar.</span></label></div>
-        <div class="field"><label class="lbl" for="cancion">Una canción que no puede faltar</label><input id="cancion" name="cancion" value="${esc(p.cancion || "")}" placeholder="La que te hace saltar a la pista"></div>
+        <div class="field"><label class="lb" for="cancion">Una canción que no puede faltar</label><input id="cancion" name="cancion" value="${esc(p.cancion || "")}" placeholder="La que te hace saltar a la pista"></div>
       </div>
-      <div class="field"><label class="lbl" for="mensaje">Un mensaje para nosotros (opcional)</label><textarea id="mensaje" name="mensaje">${esc(p.mensaje || "")}</textarea></div>
+      <div class="field"><label class="lb" for="mensaje">Un mensaje para nosotros (opcional)</label><textarea id="mensaje" name="mensaje">${esc(p.mensaje || "")}</textarea></div>
       <div id="formMsg"></div>
       <button class="btn" type="submit" id="sendBtn" style="width:100%;margin-top:4px">Enviar respuesta</button>
-      <p class="small" style="text-align:center;margin:16px 0 0">¿No sos ${esc(inv.nombre)}? <a href="#" id="otherCode">Ingresar otro código</a></p>
+      <p class="small" style="text-align:center;margin:18px 0 0">¿No sos ${esc(inv.nombre)}? <a href="#" id="otherCode">Ingresar otro código</a></p>
     </form>`;
-    panel.querySelectorAll("input[name=asiste]").forEach(r => r.addEventListener("change", () => { $("#det").hidden = r.value !== "Sí"; }));
+    $$("input[name=asiste]", panel).forEach(r => r.addEventListener("change", () => { $("#det").hidden = r.value !== "Sí"; if (r.value === "Sí") confetti(); }));
     $("#otherCode").onclick = e => { e.preventDefault(); try { localStorage.removeItem("rsvp_code"); } catch (_) {} renderCode(); };
     $("#rsvpForm").onsubmit = submit;
   }
@@ -272,10 +545,10 @@ html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-u
   function renderDone(r, returning) {
     const va = r.asiste === "Sí";
     panel.innerHTML = `<div class="done">
-      <div class="marker" style="font-size:30px">${va ? "¡Qué alegría!" : "Te vamos a extrañar"}</div>
-      <p style="font-size:16px;line-height:1.5">${returning ? "Ya tenemos tu respuesta. " : ""}${va ? `Te esperamos el ${esc(C.fechaTexto)} a las 17 hs.${r.menu && r.menu !== "Sin restricciones" ? ` Anotamos menú <b>${esc(r.menu.toLowerCase())}</b>.` : ""}` : "Gracias por avisarnos. Vamos a brindar por vos."}</p>
-      <div class="btns">${va ? `<a class="btn dark" href="${cal()}" target="_blank" rel="noopener">Agendar en el calendario</a>` : ""}<button class="btn ghost" id="editBtn">Cambiar respuesta</button></div></div>`;
-    $("#editBtn").onclick = renderForm;
+      <div class="big">${va ? "¡Nos vemos<br>en la pista!" : "Te vamos<br>a extrañar"}</div>
+      <p>${returning ? "Ya tenemos tu respuesta. " : ""}${va ? `Te esperamos el ${esc(C.fechaTexto)} a las 17 hs.${r.menu && r.menu !== "Sin restricciones" ? ` Anotamos menú <b>${esc(r.menu.toLowerCase())}</b>.` : ""}` : "Gracias por avisarnos. Vamos a brindar por vos."}</p>
+      <div class="btns">${va ? `<a class="btn k" href="${cal()}" target="_blank" rel="noopener">Agendar</a>` : ""}<button class="btn g" id="editBtn">Cambiar respuesta</button></div></div>`;
+    $("#editBtn").onclick = () => { wanted = null; renderForm(); };
   }
 
   function cal() {
@@ -293,7 +566,8 @@ html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-u
     try {
       const r = await apiPost(payload);
       if (!r.ok) throw new Error(r.error || "error del servidor");
-      inv.respuesta = payload; renderDone(payload, false);
+      inv.respuesta = payload; wanted = null; renderDone(payload, false);
+      if (asiste === "Sí") confetti();
     } catch (err) {
       msg.innerHTML = `<div class="msg">No se pudo enviar (${esc(err.message)}). Revisá tu conexión y probá de nuevo.</div>`;
       btn.disabled = false; btn.textContent = "Enviar respuesta";
