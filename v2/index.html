@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agus y Guido · 26.03.27</title>
+<meta name="description" content="Nos casamos el viernes 26 de marzo en La Herencia, La Lonja. Confirmá tu asistencia acá.">
+<meta property="og:title" content="¡Agus y Guido se casan!">
+<meta property="og:description" content="Viernes 26 de marzo · La Herencia, La Lonja. Confirmá acá.">
+<meta property="og:image" content="https://agusyguido.com.ar/fotos/03.jpg">
+<meta name="theme-color" content="#F2EBDD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,500;1,500;1,700&family=Mrs+Saint+Delafield&family=Permanent+Marker&family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23F2EBDD'/><text x='50%25' y='58%25' font-size='34' text-anchor='middle' dominant-baseline='middle' font-family='Georgia' font-style='italic' font-weight='700' fill='%23161616'>AG</text></svg>">
+<script>
+/* ============ CONFIGURACIÓN (versión 2) ============ */
+const CONFIG = {
+  novia: "Agus", novio: "Guido",
+  fechaISO: "2027-03-26T17:00:00-03:00",
+  fechaTexto: "viernes 26 de marzo",
+  limiteRSVP: "2026-11-30T23:59:00-03:00",
+  apiUrl: "https://script.google.com/macros/s/AKfycbx-aj8zIhTcFBCBK9q2JjtX_TuHyfenDim-XvhZ7GP6CnWjxRQWXUr2oViG1Yj-UjFB/exec",
+  lugar: "La Herencia Eventos, Saraví 1799, La Lonja, Pilar",
+};
+</script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#F2EBDD;color:#161616;font-family:'Inter',system-ui,sans-serif;-webkit-text-size-adjust:100%}
+.band{width:100%;display:flex;justify-content:center;overflow:hidden}
+.board{width:calc(390px * var(--s,1));height:calc(844px * var(--s,1));position:relative}
+.board>section{position:absolute!important;left:0;top:0;width:390px;transform:scale(var(--s,1));transform-origin:0 0}
+.board a,.board button{-webkit-tap-highlight-color:transparent}
+.board a:active,.board button:active{opacity:.85}
+
+/* ---- RSVP ---- */
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(22,22,22,.55);display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet.open{display:block}
+.paper{position:relative;max-width:460px;margin:0 auto;min-height:100%;background:#F2EBDD;padding:22px 20px 40px}
+@media(min-width:500px){.paper{margin:30px auto;min-height:0;box-shadow:0 20px 60px rgba(0,0,0,.4)}}
+.paper .x{position:absolute;right:12px;top:10px;border:0;background:none;font-size:34px;line-height:1;cursor:pointer;color:#161616;padding:6px 10px}
+.paper h3{font-family:'Anton',sans-serif;font-weight:400;font-size:52px;line-height:.9;margin:8px 0 0}
+.paper h3 em{font-style:normal;color:#C62420}
+.paper .firma{font-family:'Mrs Saint Delafield',cursive;font-size:38px;color:#C62420;margin:-2px 0 14px;transform:rotate(-3deg);display:inline-block}
+.lbl{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:12.5px;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px;color:#161616}
+.field{margin-bottom:20px}
+.paper input[type=text],.paper input:not([type]),.paper textarea{width:100%;font:inherit;font-size:16px;color:#161616;background:#FBF7EE;border:1.5px solid #161616;border-radius:0;padding:13px 14px;outline:none}
+.paper input:focus,.paper textarea:focus{border-color:#C62420;box-shadow:0 0 0 2px rgba(198,36,32,.2)}
+.paper textarea{min-height:84px;resize:vertical}
+.code-box{display:flex;gap:8px}
+.code-box input{text-transform:uppercase;letter-spacing:.2em;text-align:center;font-size:20px!important;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:0;padding:15px 22px;font:inherit;font-weight:600;font-size:16px;cursor:pointer;background:#C62420;color:#fff;text-decoration:none}
+.btn.dark{background:#161616;color:#F2EBDD}
+.btn.ghost{background:transparent;color:#161616;box-shadow:inset 0 0 0 1.5px #161616}
+.btn[disabled]{opacity:.6;cursor:wait}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.choice input,.chips input{position:absolute;opacity:0;pointer-events:none;width:1px}
+.choice label{display:block;text-align:center;padding:16px 8px;cursor:pointer;background:#FBF7EE;border:1.5px solid #161616}
+.choice label b{display:block;font-family:'Anton',sans-serif;font-weight:400;font-size:30px;line-height:1.05}
+.choice label span{font-size:13px;color:#5b554c}
+.choice input:checked + label.si{background:#C62420;border-color:#C62420;color:#fff}
+.choice input:checked + label.si span{color:#FBE3E0}
+.choice input:checked + label.no{background:#161616;border-color:#161616;color:#F2EBDD}
+.choice input:checked + label.no span{color:#cfc7b8}
+.choice input:focus-visible + label,.chips input:focus-visible + label{outline:2px solid #C62420;outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips label{padding:9px 13px;background:#FBF7EE;cursor:pointer;font-size:14.5px;border:1.5px solid #161616}
+.chips input:checked + label{background:#161616;color:#F2EBDD}
+.nota{background:#FBF7EE;border-left:4px solid #C62420;padding:11px 13px;margin:12px 0 0;font-size:14px;line-height:1.45}
+.details[hidden]{display:none}
+.check{display:flex;gap:12px;align-items:flex-start;background:#FBF7EE;border:1.5px solid #161616;padding:13px 14px;cursor:pointer;font-size:14.5px;line-height:1.45}
+.check:has(input:checked){border-color:#C62420;box-shadow:inset 0 0 0 1px #C62420}
+.check input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:#C62420}
+.small{font-size:13.5px;color:#5b554c}
+.small a{color:#C62420}
+.msg{padding:11px 13px;margin:12px 0 0;font-size:14.5px;background:#F9DCD8;color:#8E1A16}
+.done{text-align:center;padding-top:10px}
+.done .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.marker{font-family:'Permanent Marker',cursive;color:#C62420}
+</style>
+</head>
+<body>
+<div class="band" style="background:linear-gradient(#F2EBDD 0 55%,#161616 55%)"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #F2EBDD; position: relative; overflow: hidden">
+    <div style="position:absolute; left:22px; top:20px; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; font-size:34px; line-height:1; letter-spacing:-6px">A<span style="color:#C62420">G</span></div>
+    <div style="position:absolute; right:22px; top:30px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:11px; letter-spacing:3px">LA HERENCIA · LA LONJA</div>
+    <div style="position:absolute; left:18px; top:66px; font-family:'Anton',sans-serif; font-size:128px; line-height:.86; color:#161616">¡NOS</div>
+    <div style="position:absolute; left:16px; top:174px; font-family:'Anton',sans-serif; font-size:93px; line-height:.86; color:#C62420">CASAMOS!</div>
+    <div style="position:absolute; right:12px; top:84px; transform:rotate(-10deg); font-family:'Mrs Saint Delafield',cursive; font-size:54px; line-height:.9; text-align:center; color:#161616">Agus<br>&amp; Guido</div>
+    <div id="hola" style="position:absolute; left:22px; top:300px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:13px; letter-spacing:3px; line-height:1.7">NOS ENCANTARÍA<br>COMPARTIRLO<br>CON VOS</div>
+    <div style="position:absolute; left:22px; top:385px; font-family:'Permanent Marker',cursive; font-size:24px; color:#C62420">♡</div>
+    <img src="img/disco.png" alt="" style="position:absolute; right:0; top:290px; width:205px; mix-blend-mode:multiply; transform:rotate(-4deg); -webkit-mask-image:radial-gradient(ellipse 60% 62% at 50% 50%, #000 62%, transparent 100%); mask-image:radial-gradient(ellipse 60% 62% at 50% 50%, #000 62%, transparent 100%)">
+    <div style="position:absolute; left:0; top:426px; width:390px"><svg aria-hidden="true" width="390" height="44" viewBox="0 0 390 44" style="display:block" preserveAspectRatio="none"><path d="M0 44 L0.0 10.3 L9.3 26.3 L17.1 17.5 L25.2 29.1 L36.6 11.5 L43.7 19.5 L55.2 25.3 L62.1 13.9 L75.0 19.8 L83.9 17.4 L99.4 17.5 L111.0 18.6 L121.2 30.7 L137.2 18.7 L145.2 27.5 L153.2 10.1 L168.2 20.2 L182.4 19.7 L197.2 21.1 L204.9 10.4 L216.4 25.4 L231.5 12.1 L243.7 18.9 L254.7 13.5 L263.6 22.5 L278.8 12.6 L289.7 29.3 L305.4 14.7 L312.7 32.6 L328.4 21.6 L335.0 32.2 L344.8 31.7 L357.0 29.8 L364.6 28.9 L372.9 19.7 L387.3 29.9 L390.0 15.2 L390 44 Z" fill="#161616"></path></svg></div>
+    <div style="position:absolute; left:0; top:468px; width:390px; height:376px; background:#161616"></div>
+    <div style="position:absolute; left:26px; top:500px; width:220px; height:282px; background:#FBF7EE; padding:10px 10px 30px; box-sizing:border-box; clip-path:polygon(0.0% 0.5%,4.5% 0.2%,9.1% 1.0%,13.6% 0.1%,18.2% 0.9%,22.7% 0.6%,27.3% 0.1%,31.8% 0.8%,36.4% 0.1%,40.9% 0.7%,45.5% 0.1%,50.0% 0.1%,54.5% 0.7%,59.1% 1.3%,63.6% 0.2%,68.2% 0.4%,72.7% 1.0%,77.3% 1.5%,81.8% 0.9%,86.4% 0.6%,90.9% 1.6%,95.5% 0.1%,100.0% 1.4%,99.5% 4.5%,99.8% 9.1%,99.8% 13.6%,99.5% 18.2%,98.7% 22.7%,99.7% 27.3%,99.1% 31.8%,99.0% 36.4%,99.4% 40.9%,99.1% 45.5%,99.9% 50.0%,99.9% 54.5%,99.7% 59.1%,98.9% 63.6%,99.3% 68.2%,99.5% 72.7%,99.1% 77.3%,99.3% 81.8%,99.5% 86.4%,98.7% 90.9%,98.9% 95.5%,99.6% 100.0%,95.5% 99.1%,90.9% 99.2%,86.4% 98.6%,81.8% 98.8%,77.3% 99.5%,72.7% 98.4%,68.2% 99.8%,63.6% 99.3%,59.1% 98.8%,54.5% 99.8%,50.0% 99.2%,45.5% 99.9%,40.9% 98.9%,36.4% 98.8%,31.8% 99.1%,27.3% 98.6%,22.7% 99.5%,18.2% 98.9%,13.6% 99.0%,9.1% 99.1%,4.5% 99.3%,0.0% 98.7%,1.5% 95.5%,0.8% 90.9%,1.1% 86.4%,0.1% 81.8%,1.1% 77.3%,1.0% 72.7%,1.6% 68.2%,1.3% 63.6%,0.5% 59.1%,0.6% 54.5%,1.1% 50.0%,0.0% 45.5%,0.7% 40.9%,0.3% 36.4%,0.2% 31.8%,0.1% 27.3%,1.2% 22.7%,0.2% 18.2%,0.4% 13.6%,0.6% 9.1%,1.4% 4.5%); transform:rotate(-4deg)">
+      <img src="../fotos/11.jpg" alt="Agus y Guido en la playa" style="width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.05)">
+    </div>
+    <div style="position:absolute; right:16px; top:560px; width:150px; background:#F2EBDD; clip-path:polygon(0.0% 0.1%,4.5% 0.7%,9.1% 0.9%,13.6% 1.4%,18.2% 1.3%,22.7% 1.4%,27.3% 0.4%,31.8% 0.7%,36.4% 0.6%,40.9% 1.4%,45.5% 1.5%,50.0% 0.2%,54.5% 0.3%,59.1% 0.4%,63.6% 0.4%,68.2% 0.8%,72.7% 0.9%,77.3% 0.4%,81.8% 0.0%,86.4% 0.7%,90.9% 0.6%,95.5% 0.9%,100.0% 1.5%,98.9% 4.5%,99.2% 9.1%,99.0% 13.6%,98.9% 18.2%,99.9% 22.7%,98.6% 27.3%,98.8% 31.8%,98.6% 36.4%,98.7% 40.9%,99.4% 45.5%,99.4% 50.0%,99.8% 54.5%,99.0% 59.1%,99.9% 63.6%,99.9% 68.2%,99.7% 72.7%,99.7% 77.3%,99.5% 81.8%,99.9% 86.4%,100.0% 90.9%,99.8% 95.5%,99.8% 100.0%,95.5% 99.4%,90.9% 100.0%,86.4% 98.6%,81.8% 99.0%,77.3% 99.8%,72.7% 99.6%,68.2% 99.4%,63.6% 99.4%,59.1% 99.8%,54.5% 98.6%,50.0% 98.4%,45.5% 99.3%,40.9% 99.2%,36.4% 99.9%,31.8% 99.8%,27.3% 99.5%,22.7% 99.6%,18.2% 98.7%,13.6% 99.7%,9.1% 100.0%,4.5% 98.5%,0.0% 99.2%,0.2% 95.5%,0.9% 90.9%,0.0% 86.4%,0.8% 81.8%,1.6% 77.3%,1.4% 72.7%,1.1% 68.2%,0.4% 63.6%,0.6% 59.1%,0.3% 54.5%,1.2% 50.0%,0.9% 45.5%,1.2% 40.9%,0.5% 36.4%,0.4% 31.8%,1.3% 27.3%,1.6% 22.7%,1.4% 18.2%,1.3% 13.6%,1.3% 9.1%,1.2% 4.5%); padding:16px 12px; transform:rotate(5deg); text-align:center">
+      <div style="font-family:'Permanent Marker',cursive; font-size:24px; color:#C62420; line-height:1">26.03.2027</div>
+      <div style="margin-top:6px"><svg aria-hidden="true" width="120" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style="display:block"><path d="M2 9 C40 3 90 12 130 6 C160 2 185 8 198 5" stroke="#C62420" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
+    </div>
+    <div style="position:absolute; right:14px; top:676px; transform:rotate(-6deg); font-family:'Permanent Marker',cursive; font-size:15px; line-height:1.3; color:#F2EBDD; text-align:right">El sí es nuestro.<br>La fiesta,<br>de todos.</div>
+  </section></div></div>
+<div class="band" style="background:#161616"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #161616; color: #F2EBDD; padding: 0 0 30px; position: relative; overflow: hidden">
+    <div style="padding: 40px 26px 0">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:4px; color:#B9B1A3">02 / EL PLAN</div>
+      <h2 style="margin: 10px 0 0; font-family:'Playfair Display',serif; font-style:italic; font-weight:500; font-size:54px; line-height:.95">¿Cuál es<br>el plan?</h2>
+      <div style="margin-top:8px"><svg aria-hidden="true" width="150" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style="display:block"><path d="M2 9 C40 3 90 12 130 6 C160 2 185 8 198 5" stroke="#C62420" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
+      <p style="margin: 14px 0 0; font-size: 16px; line-height: 1.45; color:#E6DECF">Disfrutar con familia, amigos, comida rica y mucha música</p>
+    </div>
+    <div style="margin: 24px 22px 0; display:flex; flex-direction:column; gap:12px">
+      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#C62420">17HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Ceremonia</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Iniciaremos con alguna que otra cursilería</div></div></div>
+      <div style="height:1px; background:#3A3A3A"></div>
+      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#F2EBDD">18HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Recepción</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Muuucha comida rica</div></div></div>
+      <div style="height:1px; background:#3A3A3A"></div>
+      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#C62420">20HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Fiesta</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Acá cambiate y ponete zapas, que queremos que disfrutes la noche</div></div></div>
+      <div style="height:1px; background:#3A3A3A"></div>
+      <div style="display:flex; gap:16px; align-items:center"><div style="flex:0 0 84px; font-family:'Anton',sans-serif; font-size:46px; line-height:1; color:#F2EBDD">01HS</div><div><div style="font-family:'Playfair Display',serif; font-style:italic; font-size:24px">Fin de fiesta</div><div style="font-size:14px; line-height:1.4; color:#CFC7B8">Con comida bajón, obviamente</div></div></div>
+    </div>
+    <div style="position:absolute; right:-10px; bottom:26px; width:190px; background:#F2EBDD; color:#161616; clip-path:polygon(0.0% 0.4%,4.5% 0.8%,9.1% 0.6%,13.6% 0.0%,18.2% 0.0%,22.7% 0.4%,27.3% 0.4%,31.8% 1.1%,36.4% 1.5%,40.9% 0.7%,45.5% 1.5%,50.0% 1.6%,54.5% 1.5%,59.1% 0.6%,63.6% 0.4%,68.2% 0.4%,72.7% 0.3%,77.3% 0.3%,81.8% 1.0%,86.4% 1.4%,90.9% 1.3%,95.5% 0.8%,100.0% 1.0%,98.7% 4.5%,99.9% 9.1%,98.9% 13.6%,98.5% 18.2%,98.7% 22.7%,98.8% 27.3%,99.2% 31.8%,99.7% 36.4%,98.7% 40.9%,99.5% 45.5%,98.7% 50.0%,98.4% 54.5%,99.4% 59.1%,99.4% 63.6%,98.5% 68.2%,98.8% 72.7%,99.7% 77.3%,99.8% 81.8%,99.8% 86.4%,98.6% 90.9%,98.7% 95.5%,99.8% 100.0%,95.5% 98.7%,90.9% 98.4%,86.4% 98.9%,81.8% 99.4%,77.3% 99.1%,72.7% 99.8%,68.2% 100.0%,63.6% 98.4%,59.1% 99.0%,54.5% 99.2%,50.0% 98.5%,45.5% 99.3%,40.9% 98.6%,36.4% 98.7%,31.8% 99.7%,27.3% 99.6%,22.7% 99.5%,18.2% 99.6%,13.6% 99.1%,9.1% 99.6%,4.5% 99.3%,0.0% 99.8%,1.5% 95.5%,0.6% 90.9%,0.7% 86.4%,0.9% 81.8%,1.4% 77.3%,0.7% 72.7%,1.5% 68.2%,0.8% 63.6%,0.9% 59.1%,0.8% 54.5%,0.0% 50.0%,0.7% 45.5%,0.3% 40.9%,0.0% 36.4%,1.3% 31.8%,0.3% 27.3%,0.8% 22.7%,1.2% 18.2%,0.9% 13.6%,0.5% 9.1%,0.8% 4.5%); padding:14px 16px; transform:rotate(-5deg)">
+      <div style="font-family:'Permanent Marker',cursive; font-size:17px; line-height:1.25">Misma gente.<br>Más historias.</div>
+    </div>
+  </section></div></div>
+<div class="band" style="background:#F2EBDD"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #F2EBDD; padding: 34px 20px 24px; display:flex; flex-direction:column; gap:13px; position:relative; overflow:hidden">
+    <div style="display:flex; align-items:flex-end; gap:10px">
+      <h2 style="margin:0; font-family:'Anton',sans-serif; font-weight:400; font-size:58px; line-height:.9">DETALLES</h2>
+    </div>
+    <div style="margin:-6px 0 4px 8px; font-family:'Mrs Saint Delafield',cursive; font-size:40px; line-height:1; color:#C62420; transform:rotate(-3deg)">a tener en cuenta</div>
+    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.9%,4.5% 1.3%,9.1% 0.2%,13.6% 0.9%,18.2% 0.4%,22.7% 0.4%,27.3% 1.2%,31.8% 0.8%,36.4% 0.9%,40.9% 1.2%,45.5% 1.5%,50.0% 0.7%,54.5% 1.0%,59.1% 0.8%,63.6% 0.8%,68.2% 1.1%,72.7% 0.7%,77.3% 0.9%,81.8% 0.8%,86.4% 1.5%,90.9% 1.1%,95.5% 1.4%,100.0% 1.5%,99.6% 4.5%,99.1% 9.1%,98.5% 13.6%,98.7% 18.2%,99.8% 22.7%,99.8% 27.3%,99.3% 31.8%,99.9% 36.4%,99.6% 40.9%,99.9% 45.5%,98.9% 50.0%,98.7% 54.5%,98.6% 59.1%,99.8% 63.6%,98.9% 68.2%,98.9% 72.7%,99.8% 77.3%,98.6% 81.8%,98.5% 86.4%,99.6% 90.9%,98.5% 95.5%,99.4% 100.0%,95.5% 99.2%,90.9% 98.4%,86.4% 98.7%,81.8% 99.7%,77.3% 99.3%,72.7% 99.2%,68.2% 99.5%,63.6% 99.7%,59.1% 99.5%,54.5% 98.8%,50.0% 100.0%,45.5% 99.1%,40.9% 99.3%,36.4% 100.0%,31.8% 99.5%,27.3% 99.0%,22.7% 99.2%,18.2% 99.9%,13.6% 98.4%,9.1% 98.7%,4.5% 98.4%,0.0% 99.8%,0.4% 95.5%,0.1% 90.9%,1.2% 86.4%,0.4% 81.8%,0.2% 77.3%,0.7% 72.7%,1.5% 68.2%,1.3% 63.6%,0.4% 59.1%,0.2% 54.5%,1.5% 50.0%,0.9% 45.5%,1.1% 40.9%,0.1% 36.4%,0.1% 31.8%,1.1% 27.3%,0.7% 22.7%,0.1% 18.2%,1.5% 13.6%,1.0% 9.1%,1.3% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">TRASLADOS</div>
+      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">El salón tiene estacionamiento privado si querés ir con tu auto. ¿Querés tomar tranquilo sin pensar en la vuelta? Cerca de la fecha vamos a organizar remises puerta a puerta o combis por zona. Anotate cuando confirmes y nuestra planner te va a contactar.</p><div style="display:flex; gap:8px; margin-top:10px">
+        <a target="_blank" rel="noopener" href="https://waze.com/ul?ll=-34.4491547,-58.840288&amp;navigate=yes" style="flex:1; text-align:center; text-decoration:none; background:#161616; color:#F2EBDD; font-weight:600; font-size:13px; padding:12px 6px">Ir con Waze</a>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=La+Herencia+Eventos" style="flex:1; text-align:center; text-decoration:none; background:#C62420; color:#FFFFFF; font-weight:600; font-size:13px; padding:12px 6px">Google Maps</a>
+      </div>
+    </div>
+    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.1%,4.5% 1.4%,9.1% 0.1%,13.6% 1.4%,18.2% 0.7%,22.7% 0.5%,27.3% 0.9%,31.8% 1.5%,36.4% 0.4%,40.9% 0.2%,45.5% 0.8%,50.0% 0.4%,54.5% 0.2%,59.1% 0.3%,63.6% 0.1%,68.2% 0.3%,72.7% 0.5%,77.3% 0.5%,81.8% 1.2%,86.4% 0.5%,90.9% 0.8%,95.5% 0.3%,100.0% 0.6%,100.0% 4.5%,99.6% 9.1%,100.0% 13.6%,98.8% 18.2%,99.1% 22.7%,99.7% 27.3%,99.2% 31.8%,98.5% 36.4%,99.8% 40.9%,98.7% 45.5%,99.3% 50.0%,99.2% 54.5%,98.7% 59.1%,99.4% 63.6%,99.2% 68.2%,98.9% 72.7%,98.4% 77.3%,99.5% 81.8%,98.7% 86.4%,98.9% 90.9%,99.0% 95.5%,99.4% 100.0%,95.5% 99.4%,90.9% 99.9%,86.4% 99.8%,81.8% 99.9%,77.3% 98.8%,72.7% 99.6%,68.2% 99.7%,63.6% 99.9%,59.1% 98.7%,54.5% 98.6%,50.0% 98.9%,45.5% 99.5%,40.9% 99.6%,36.4% 99.5%,31.8% 99.3%,27.3% 99.7%,22.7% 99.3%,18.2% 99.6%,13.6% 98.5%,9.1% 98.4%,4.5% 99.1%,0.0% 99.6%,1.5% 95.5%,0.5% 90.9%,0.6% 86.4%,0.0% 81.8%,0.6% 77.3%,0.8% 72.7%,0.8% 68.2%,0.3% 63.6%,0.8% 59.1%,0.0% 54.5%,0.4% 50.0%,0.1% 45.5%,0.6% 40.9%,0.1% 36.4%,0.0% 31.8%,0.5% 27.3%,0.4% 22.7%,0.9% 18.2%,0.8% 13.6%,1.2% 9.1%,1.1% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">DRESS CODE</div>
+      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4"><b>Elegante.</b> Blanco, beige, nude y bordó quedan reservados para los novios.</p>
+    </div>
+    <div style="background:#FBF7EE; clip-path:polygon(0.0% 1.1%,4.5% 1.4%,9.1% 0.6%,13.6% 0.5%,18.2% 1.6%,22.7% 0.2%,27.3% 1.2%,31.8% 1.0%,36.4% 0.1%,40.9% 1.3%,45.5% 1.4%,50.0% 1.0%,54.5% 1.2%,59.1% 1.3%,63.6% 0.2%,68.2% 0.8%,72.7% 0.8%,77.3% 1.3%,81.8% 1.3%,86.4% 1.3%,90.9% 0.9%,95.5% 1.4%,100.0% 1.1%,98.9% 4.5%,99.6% 9.1%,100.0% 13.6%,99.8% 18.2%,99.4% 22.7%,99.8% 27.3%,98.7% 31.8%,99.1% 36.4%,99.0% 40.9%,99.0% 45.5%,98.9% 50.0%,99.2% 54.5%,100.0% 59.1%,98.7% 63.6%,98.8% 68.2%,99.2% 72.7%,99.1% 77.3%,98.9% 81.8%,99.9% 86.4%,98.8% 90.9%,99.6% 95.5%,99.9% 100.0%,95.5% 99.6%,90.9% 98.8%,86.4% 99.7%,81.8% 98.8%,77.3% 98.4%,72.7% 99.2%,68.2% 99.4%,63.6% 99.2%,59.1% 98.9%,54.5% 98.8%,50.0% 99.0%,45.5% 99.0%,40.9% 99.9%,36.4% 99.8%,31.8% 99.6%,27.3% 98.8%,22.7% 99.5%,18.2% 99.1%,13.6% 100.0%,9.1% 99.9%,4.5% 99.6%,0.0% 98.9%,1.1% 95.5%,1.1% 90.9%,0.5% 86.4%,0.8% 81.8%,0.7% 77.3%,0.7% 72.7%,0.2% 68.2%,1.4% 63.6%,0.3% 59.1%,1.6% 54.5%,1.5% 50.0%,0.0% 45.5%,0.7% 40.9%,1.3% 36.4%,1.5% 31.8%,0.7% 27.3%,0.4% 22.7%,0.3% 18.2%,1.5% 13.6%,0.3% 9.1%,0.9% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">¿PUEDO IR CON ACOMPAÑANTE O CHICOS?</div>
+      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">Las invitaciones son personales y esta vez la fiesta es solo para adultos. ¡Gracias por entender!</p>
+    </div>
+    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.2%,4.5% 0.8%,9.1% 1.5%,13.6% 0.2%,18.2% 1.3%,22.7% 0.8%,27.3% 1.4%,31.8% 1.1%,36.4% 0.4%,40.9% 1.4%,45.5% 0.8%,50.0% 0.0%,54.5% 0.0%,59.1% 0.8%,63.6% 0.7%,68.2% 0.5%,72.7% 0.2%,77.3% 0.6%,81.8% 0.5%,86.4% 1.3%,90.9% 0.0%,95.5% 1.2%,100.0% 1.3%,99.8% 4.5%,98.5% 9.1%,98.9% 13.6%,98.6% 18.2%,99.5% 22.7%,99.4% 27.3%,99.4% 31.8%,98.4% 36.4%,99.1% 40.9%,99.4% 45.5%,99.3% 50.0%,99.6% 54.5%,99.9% 59.1%,99.8% 63.6%,98.7% 68.2%,99.5% 72.7%,98.5% 77.3%,99.6% 81.8%,99.6% 86.4%,99.2% 90.9%,99.7% 95.5%,99.4% 100.0%,95.5% 98.5%,90.9% 98.6%,86.4% 98.7%,81.8% 99.0%,77.3% 98.5%,72.7% 98.5%,68.2% 99.1%,63.6% 98.8%,59.1% 99.9%,54.5% 98.8%,50.0% 99.3%,45.5% 98.8%,40.9% 99.0%,36.4% 99.5%,31.8% 99.9%,27.3% 98.5%,22.7% 99.8%,18.2% 99.2%,13.6% 99.5%,9.1% 99.5%,4.5% 98.8%,0.0% 98.4%,0.4% 95.5%,1.0% 90.9%,0.5% 86.4%,0.9% 81.8%,0.6% 77.3%,0.3% 72.7%,0.3% 68.2%,0.3% 63.6%,1.4% 59.1%,0.8% 54.5%,0.4% 50.0%,1.5% 45.5%,1.6% 40.9%,0.7% 36.4%,0.2% 31.8%,0.3% 27.3%,0.1% 22.7%,0.5% 18.2%,0.1% 13.6%,0.4% 9.1%,0.4% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">ES VIERNES SANTO Y NO COMO CARNE</div>
+      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">En el formulario elegí la opción vegetariana. ¡Vas a comer riquísimo igual!</p>
+    </div>
+    <div style="background:#FBF7EE; clip-path:polygon(0.0% 0.9%,4.5% 1.4%,9.1% 1.2%,13.6% 0.7%,18.2% 0.7%,22.7% 0.8%,27.3% 0.6%,31.8% 0.5%,36.4% 0.1%,40.9% 0.4%,45.5% 1.5%,50.0% 0.2%,54.5% 0.8%,59.1% 1.0%,63.6% 1.4%,68.2% 0.3%,72.7% 0.4%,77.3% 0.4%,81.8% 0.6%,86.4% 0.7%,90.9% 1.5%,95.5% 1.4%,100.0% 1.4%,100.0% 4.5%,99.9% 9.1%,98.9% 13.6%,98.6% 18.2%,99.2% 22.7%,99.1% 27.3%,100.0% 31.8%,99.4% 36.4%,98.5% 40.9%,98.7% 45.5%,98.6% 50.0%,98.4% 54.5%,99.6% 59.1%,99.8% 63.6%,99.8% 68.2%,99.2% 72.7%,98.9% 77.3%,98.5% 81.8%,98.8% 86.4%,99.0% 90.9%,98.8% 95.5%,99.3% 100.0%,95.5% 99.1%,90.9% 99.9%,86.4% 98.7%,81.8% 99.6%,77.3% 98.5%,72.7% 99.0%,68.2% 99.5%,63.6% 99.8%,59.1% 99.6%,54.5% 99.0%,50.0% 98.9%,45.5% 99.8%,40.9% 99.9%,36.4% 99.2%,31.8% 99.1%,27.3% 99.4%,22.7% 99.6%,18.2% 99.0%,13.6% 100.0%,9.1% 99.5%,4.5% 99.3%,0.0% 98.5%,1.0% 95.5%,1.4% 90.9%,0.8% 86.4%,0.4% 81.8%,0.4% 77.3%,1.5% 72.7%,1.1% 68.2%,0.5% 63.6%,0.0% 59.1%,0.8% 54.5%,1.1% 50.0%,0.7% 45.5%,0.4% 40.9%,1.1% 36.4%,1.5% 31.8%,0.4% 27.3%,0.1% 22.7%,0.5% 18.2%,0.7% 13.6%,1.1% 9.1%,0.3% 4.5%); padding:16px 16px; box-shadow:0 2px 0 rgba(0,0,0,.05)">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:12px; letter-spacing:3px; color:#C62420">¿RESTRICCIÓN ALIMENTARIA?</div>
+      <p style="margin:5px 0 0; font-size:14.5px; line-height:1.4">Aclarala en el formulario y el catering arma todo lo que necesites.</p>
+    </div>
+  </section></div></div>
+<div class="band" style="background:linear-gradient(#4A1317 0 88%,#F2EBDD 88%)"><div class="board"><section style="height: 844px; box-sizing: border-box; background: #4A1317; color: #F2EBDD; position: relative; overflow: hidden">
+    <img src="img/tel.png" alt="" style="position:absolute; right:0; top:18px; width:112px; -webkit-mask-image:radial-gradient(ellipse 70% 60% at 55% 50%, #000 60%, transparent 100%); mask-image:radial-gradient(ellipse 70% 60% at 55% 50%, #000 60%, transparent 100%)">
+    <h2 id="saludo" style="position:absolute; left:24px; top:40px; margin:0; width:250px; font-family:'Playfair Display',serif; font-weight:500; font-size:52px; line-height:.95">Queremos<br>que estés.</h2>
+    <div style="position:absolute; left:26px; top:150px"><svg aria-hidden="true" width="140" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style="display:block"><path d="M2 9 C40 3 90 12 130 6 C160 2 185 8 198 5" stroke="#C62420" stroke-width="5" fill="none" stroke-linecap="round"></path></svg></div>
+    <div style="position:absolute; left:28px; top:196px; width:196px; height:236px; background:#FBF7EE; padding:9px 9px 26px; box-sizing:border-box; clip-path:polygon(0.0% 1.3%,4.5% 1.2%,9.1% 0.8%,13.6% 0.3%,18.2% 1.6%,22.7% 0.5%,27.3% 1.3%,31.8% 0.4%,36.4% 0.4%,40.9% 1.2%,45.5% 0.5%,50.0% 1.5%,54.5% 0.8%,59.1% 0.3%,63.6% 0.4%,68.2% 0.7%,72.7% 1.1%,77.3% 1.5%,81.8% 0.2%,86.4% 0.6%,90.9% 0.3%,95.5% 1.6%,100.0% 0.2%,99.9% 4.5%,99.9% 9.1%,99.4% 13.6%,98.6% 18.2%,98.6% 22.7%,98.8% 27.3%,98.4% 31.8%,98.5% 36.4%,99.5% 40.9%,99.7% 45.5%,98.5% 50.0%,98.8% 54.5%,99.9% 59.1%,98.9% 63.6%,99.4% 68.2%,99.4% 72.7%,99.5% 77.3%,99.7% 81.8%,100.0% 86.4%,99.6% 90.9%,99.4% 95.5%,98.5% 100.0%,95.5% 99.8%,90.9% 98.5%,86.4% 99.7%,81.8% 99.4%,77.3% 98.7%,72.7% 98.7%,68.2% 99.3%,63.6% 99.9%,59.1% 99.2%,54.5% 99.4%,50.0% 98.5%,45.5% 99.7%,40.9% 99.4%,36.4% 98.6%,31.8% 100.0%,27.3% 99.3%,22.7% 98.7%,18.2% 98.8%,13.6% 99.9%,9.1% 99.9%,4.5% 99.9%,0.0% 98.5%,0.4% 95.5%,1.2% 90.9%,1.4% 86.4%,0.5% 81.8%,0.4% 77.3%,1.5% 72.7%,1.0% 68.2%,0.4% 63.6%,1.1% 59.1%,0.5% 54.5%,0.4% 50.0%,0.0% 45.5%,1.2% 40.9%,1.5% 36.4%,1.0% 31.8%,1.5% 27.3%,0.0% 22.7%,0.4% 18.2%,0.8% 13.6%,1.5% 9.1%,1.5% 4.5%); transform:rotate(3deg)">
+      <img src="../fotos/15.jpg" alt="Agus y Guido entre tulipanes" style="width:100%; height:100%; object-fit:cover; display:block">
+    </div>
+    <div style="position:absolute; left:0; right:0; top:462px; text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:13px; letter-spacing:4px">TE ESPERAMOS EL</div>
+      <div style="font-family:'Anton',sans-serif; font-size:60px; line-height:1.05; color:#F2EBDD">26.03.2027</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:13px; letter-spacing:4px">A LAS 17 HS EN <span style="font-family:'Playfair Display',serif; font-style:italic; font-weight:500; font-size:19px; letter-spacing:0">“La Herencia”</span></div>
+      <button type="button" class="openRsvp" style="border:0; cursor:pointer; font-family:inherit; margin-top:20px; display:inline-block; text-decoration:none; background:#C62420; color:#FFFFFF; font-weight:600; font-size:17px; padding:17px 40px">Confirmar asistencia</button>
+      <div style="margin-top:12px; font-size:14px; color:#E6DECF">Quedan <b style="color:#FFFFFF"><span class="dias">—</span> días</b> para confirmar</div>
+    </div>
+    <div style="position:absolute; left:0; top:720px; width:390px"><svg aria-hidden="true" width="390" height="40" viewBox="0 0 390 40" style="display:block" preserveAspectRatio="none"><path d="M0 40 L0.0 18.0 L11.2 17.7 L18.4 14.9 L31.7 27.9 L38.1 21.2 L51.6 10.8 L66.0 12.4 L78.0 21.0 L90.3 16.1 L100.5 21.7 L110.7 23.2 L121.2 18.8 L127.5 22.4 L138.3 14.7 L152.0 25.6 L162.6 13.6 L173.3 12.1 L180.6 18.6 L187.5 18.8 L198.6 10.8 L211.0 11.6 L224.3 25.6 L235.4 11.1 L246.5 17.6 L262.0 12.7 L276.5 29.9 L289.9 26.3 L297.8 29.6 L308.7 29.1 L323.9 13.3 L337.8 28.6 L344.4 17.0 L358.0 13.2 L372.9 15.5 L387.1 12.9 L390.0 28.4 L390 40 Z" fill="#F2EBDD"></path></svg></div>
+    <div style="position:absolute; left:0; top:758px; width:390px; height:86px; background:#F2EBDD"></div>
+    <div style="position:absolute; left:0; right:0; top:744px; text-align:center; color:#161616">
+      <div style="font-family:'Permanent Marker',cursive; font-size:24px; color:#C62420">¡Te esperamos!</div>
+      <div style="font-family:'Mrs Saint Delafield',cursive; font-size:44px; line-height:1">Agus &amp; Guido</div>
+    </div>
+  </section></div></div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="paper">
+    <button class="x" id="closeSheet" aria-label="Cerrar">×</button>
+    <h3 id="sheetTitle">¿VENÍS<br><em>A LA FIESTA?</em></h3>
+    <div class="firma">confirmá antes del 30/11</div>
+    <div id="panel"></div>
+  </div>
+</div>
+<script>
+(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const C = CONFIG;
+
+  /* escala: cada pantalla entra completa en el celu */
+  const fit = () => { const s = Math.min(innerWidth / 390, innerHeight / 844, 1.25); document.documentElement.style.setProperty("--s", s.toFixed(4)); };
+  let lastW = 0; const onR = () => { if (Math.abs(innerWidth - lastW) > 2 || !lastW) { lastW = innerWidth; fit(); } };
+  onR(); addEventListener("resize", onR); addEventListener("orientationchange", () => setTimeout(fit, 200));
+
+  /* cuenta regresiva para confirmar */
+  const dias = Math.max(0, Math.ceil((new Date(C.limiteRSVP) - Date.now()) / 864e5));
+  document.querySelectorAll(".dias").forEach(e => e.textContent = dias);
+
+  /* API */
+  const apiGet = async code => (await fetch(`${C.apiUrl}?action=invite&code=${encodeURIComponent(code)}`)).json();
+  const apiPost = async p => (await fetch(C.apiUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(p) })).json();
+
+  const sheet = $("#sheet"), panel = $("#panel");
+  let inv = null, loading = null;
+  const open = () => { sheet.classList.add("open"); document.body.style.overflow = "hidden"; if (!loading) inv ? (inv.respuesta ? renderDone(inv.respuesta, true) : renderForm()) : renderCode(); };
+  const close = () => { sheet.classList.remove("open"); document.body.style.overflow = ""; };
+  document.querySelectorAll(".openRsvp").forEach(b => b.onclick = open);
+  $("#closeSheet").onclick = close;
+  sheet.addEventListener("click", e => { if (e.target === sheet) close(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+
+  const MENUS = ["Sin restricciones", "Vegetariano", "Vegano", "Sin TACC (celíaco)", "Sin lactosa", "Otro"];
+
+  function renderCode(error) {
+    inv = null;
+    panel.innerHTML = `<form id="codeForm">
+      <div class="field"><label class="lbl" for="code">Tu código de invitación</label>
+        <div class="code-box"><input id="code" autocomplete="off" required maxlength="10" placeholder="K7Q2M"><button class="btn" type="submit">Entrar</button></div></div>
+      <p class="small" style="margin:0">Está en el mensaje que te mandamos por WhatsApp. Si entraste con tu link, no hace falta.</p>
+      ${error ? `<div class="msg">${esc(error)}</div>` : ""}</form>`;
+    $("#codeForm").onsubmit = e => { e.preventDefault(); load($("#code").value.trim().toUpperCase(), true); };
+  }
+
+  function saludar(nombre) {
+    const n = esc(nombre.split(" ")[0]).toUpperCase();
+    const h = $("#hola"); if (h && !h.dataset.done) { h.dataset.done = 1; h.innerHTML = `<span style="color:#C62420">HOLA, ${n}:</span><br>` + h.innerHTML; h.style.top = "282px"; }
+  }
+
+  async function load(code, show) {
+    if (show) panel.innerHTML = `<p>Buscando tu invitación…</p>`;
+    loading = true;
+    try {
+      const d = await apiGet(code);
+      loading = null;
+      if (!d.ok) { if (show) renderCode(d.error || "No encontramos ese código. Revisá el mensaje que te mandamos."); return; }
+      inv = d;
+      try { localStorage.setItem("rsvp_code", code); } catch (_) {}
+      try { const u = new URL(location.href); u.searchParams.set("c", code); history.replaceState(null, "", u); } catch (_) {}
+      saludar(d.nombre);
+      if (show || sheet.classList.contains("open")) d.respuesta ? renderDone(d.respuesta, true) : renderForm();
+    } catch (err) {
+      loading = null;
+      if (show || sheet.classList.contains("open")) renderCode("No pudimos conectarnos. Revisá tu conexión y probá de nuevo.");
+    }
+  }
+
+  function renderForm() {
+    const p = inv.respuesta || {}, first = esc(inv.nombre.split(" ")[0]), menu = p.menu || "Sin restricciones";
+    panel.innerHTML = `<form id="rsvpForm" novalidate>
+      <p style="margin:0 0 16px;font-size:17px">¡Hola, <b>${first}</b>! ¿Venís el ${esc(C.fechaTexto)}?</p>
+      <div class="choice" role="radiogroup" aria-label="¿Venís?">
+        <input type="radio" id="si" name="asiste" value="Sí" ${p.asiste === "Sí" ? "checked" : ""}><label class="si" for="si"><b>¡VOY!</b><span>No me lo pierdo</span></label>
+        <input type="radio" id="no" name="asiste" value="No" ${p.asiste === "No" ? "checked" : ""}><label class="no" for="no"><b>NO PUEDO</b><span>Brindo desde lejos</span></label>
+      </div>
+      <div class="details" id="det" ${p.asiste === "Sí" ? "" : "hidden"}>
+        <div class="field"><span class="lbl" id="menuLbl">¿Qué menú preferís?</span>
+          <div class="chips" role="radiogroup" aria-labelledby="menuLbl">${MENUS.map((m, i) => `<input type="radio" name="menu" id="m${i}" value="${m}" ${menu === m ? "checked" : ""}><label for="m${i}">${m}</label>`).join("")}</div>
+          <div class="nota"><b>Es Viernes Santo.</b> Si no comés carne ese día, elegí <b>Vegetariano</b>. ¡Vas a comer riquísimo igual!</div></div>
+        <div class="field"><label class="lbl" for="alergias">¿Alguna alergia u otra restricción?</label><input id="alergias" name="alergias" value="${esc(p.alergias || "")}" placeholder="Ej: alergia a los frutos secos"></div>
+        <div class="field"><span class="lbl">Traslados</span>
+          <label class="check"><input type="checkbox" name="traslado" ${p.traslado ? "checked" : ""}><span>Vamos a organizar remises puerta a puerta o combis por zona. <b>¿Querés sumarte?</b> Nuestra planner te va a contactar.</span></label></div>
+        <div class="field"><label class="lbl" for="cancion">Una canción que no puede faltar</label><input id="cancion" name="cancion" value="${esc(p.cancion || "")}" placeholder="La que te hace saltar a la pista"></div>
+      </div>
+      <div class="field"><label class="lbl" for="mensaje">Un mensaje para nosotros (opcional)</label><textarea id="mensaje" name="mensaje">${esc(p.mensaje || "")}</textarea></div>
+      <div id="formMsg"></div>
+      <button class="btn" type="submit" id="sendBtn" style="width:100%;margin-top:4px">Enviar respuesta</button>
+      <p class="small" style="text-align:center;margin:16px 0 0">¿No sos ${esc(inv.nombre)}? <a href="#" id="otherCode">Ingresar otro código</a></p>
+    </form>`;
+    panel.querySelectorAll("input[name=asiste]").forEach(r => r.addEventListener("change", () => { $("#det").hidden = r.value !== "Sí"; }));
+    $("#otherCode").onclick = e => { e.preventDefault(); try { localStorage.removeItem("rsvp_code"); } catch (_) {} renderCode(); };
+    $("#rsvpForm").onsubmit = submit;
+  }
+
+  function renderDone(r, returning) {
+    const va = r.asiste === "Sí";
+    panel.innerHTML = `<div class="done">
+      <div class="marker" style="font-size:30px">${va ? "¡Qué alegría!" : "Te vamos a extrañar"}</div>
+      <p style="font-size:16px;line-height:1.5">${returning ? "Ya tenemos tu respuesta. " : ""}${va ? `Te esperamos el ${esc(C.fechaTexto)} a las 17 hs.${r.menu && r.menu !== "Sin restricciones" ? ` Anotamos menú <b>${esc(r.menu.toLowerCase())}</b>.` : ""}` : "Gracias por avisarnos. Vamos a brindar por vos."}</p>
+      <div class="btns">${va ? `<a class="btn dark" href="${cal()}" target="_blank" rel="noopener">Agendar en el calendario</a>` : ""}<button class="btn ghost" id="editBtn">Cambiar respuesta</button></div></div>`;
+    $("#editBtn").onclick = renderForm;
+  }
+
+  function cal() {
+    const s = new Date(C.fechaISO), e = new Date(s.getTime() + 8 * 36e5), f = d => d.toISOString().replace(/[-:]|\.\d{3}/g, "");
+    return "https://calendar.google.com/calendar/render?" + new URLSearchParams({ action: "TEMPLATE", text: `Casamiento ${C.novia} y ${C.novio}`, dates: `${f(s)}/${f(e)}`, location: C.lugar, details: "https://agusyguido.com.ar" });
+  }
+
+  async function submit(e) {
+    e.preventDefault();
+    const fd = new FormData(e.target), msg = $("#formMsg"), asiste = fd.get("asiste");
+    if (!asiste) { msg.innerHTML = `<div class="msg">Elegí si venís o no para poder enviar.</div>`; return; }
+    const payload = { action: "rsvp", codigo: inv.codigo, asiste, mensaje: (fd.get("mensaje") || "").trim() };
+    if (asiste === "Sí") Object.assign(payload, { menu: fd.get("menu") || "Sin restricciones", alergias: (fd.get("alergias") || "").trim(), cancion: (fd.get("cancion") || "").trim(), traslado: fd.get("traslado") === "on" });
+    const btn = $("#sendBtn"); btn.disabled = true; btn.textContent = "Enviando…"; msg.innerHTML = "";
+    try {
+      const r = await apiPost(payload);
+      if (!r.ok) throw new Error(r.error || "error del servidor");
+      inv.respuesta = payload; renderDone(payload, false);
+    } catch (err) {
+      msg.innerHTML = `<div class="msg">No se pudo enviar (${esc(err.message)}). Revisá tu conexión y probá de nuevo.</div>`;
+      btn.disabled = false; btn.textContent = "Enviar respuesta";
+    }
+  }
+
+  let start = null;
+  try { start = new URLSearchParams(location.search).get("c"); } catch (_) {}
+  if (!start) { try { start = localStorage.getItem("rsvp_code"); } catch (_) {} }
+  if (start) load(start.toUpperCase(), false);
+})();
+</script>
+</body>
+</html>
