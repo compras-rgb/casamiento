@@ -44,7 +44,11 @@ const CONFIG = {
 
   // Horarios de la celebración. Vacío = muestra "Próximamente". Formato:
   // { hora: "16:30", que: "Llegamos", detalle: "Bienvenida en el jardín" },  (hora: "" = sin horario)
-  dia: [],
+  dia: [
+    { hora: "17 hs", que: "Ceremonia", detalle: "Un poco de palabras cursis", icono: "ic_arch.png" },
+    { hora: "01 hs", que: "Comida bajón", detalle: "…y te rajamos", icono: "ic_car.png" },
+  ],
+  diaMedio: "Lo del medio es sorpresa",   // texto entre el primer y el último horario ("" = no se muestra)
   dressCode: "Elegante para llegar. Cuando arranca la fiesta, ponete cómodo. Hay jardín: mejor taco ancho que aguja.",
 
   preguntas: [
@@ -182,6 +186,16 @@ nav a.cta{background:var(--green);color:var(--yellow)}
 .steps{list-style:none;margin:0;padding:0;counter-reset:s}
 .steps li{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:20px 0;border-top:3px solid var(--green)}
 .steps li:last-child{border-bottom:3px solid var(--green)}
+.steps.hitos li.con-ico{grid-template-columns:120px 1fr;grid-template-areas:"ico h" "ico t";align-items:end;column-gap:20px;row-gap:2px;padding:22px 0}
+.steps.hitos li.con-ico .ico{grid-area:ico;width:120px;height:120px;background:var(--green);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;align-self:center}
+.steps.hitos li.con-ico .h{grid-area:h;display:inline-block;justify-self:start;background:var(--yellow);color:var(--green);padding:2px 12px;border-radius:999px;transform:rotate(-3deg);font-size:1.25rem}
+.steps.hitos li.con-ico>div:last-child{grid-area:t;align-self:start}
+.steps.hitos li.con-ico:last-child .h{background:var(--pink);color:#fff;transform:rotate(2deg)}
+.steps.hitos li.con-ico b{font-size:clamp(2rem,4.6vw,2.8rem)}
+.steps.hitos li.con-ico span{font-size:1.15rem;font-weight:600}
+.steps.hitos li.medio{display:block;border-top:3px dashed var(--green);padding:16px 0;text-align:center}
+.steps.hitos li.medio span{display:inline-block;margin:0;font-weight:800;font-size:1.05rem;letter-spacing:.02em;background:var(--green);color:var(--yellow);padding:6px 16px;border-radius:999px;transform:rotate(-1.5deg)}
+.steps.hitos li.medio + li{border-top:3px dashed var(--green)}
 .steps .h{font-weight:800;font-size:1.3rem}
 .steps .h:empty::before{content:"después";font-weight:500;font-size:1rem;opacity:.75}
 .steps b{display:block;font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1}
@@ -410,7 +424,12 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   if (C.historia.length) { const s = $("#story"); s.hidden = false; s.innerHTML = C.historia.map(p => `<p>${esc(p)}</p>`).join(""); }
   $("#diaFecha").textContent = `${C.fechaTexto[0].toUpperCase()}${C.fechaTexto.slice(1)}, en La Herencia.`;
   if (!C.dia.length) $("#steps").outerHTML = `<div class="soon"><b>Próximamente</b><span>Muy pronto vas a encontrar acá los horarios de la celebración.</span></div>`;
-  else $("#steps").innerHTML = C.dia.map(i => `<li><div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
+  else {
+    const base = F[0] ? F[0].replace(/[^/]*$/, "") : "fotos/";
+    $("#steps").classList.add("hitos");
+    $("#steps").innerHTML = C.dia.map((i, k) => (k > 0 && C.diaMedio ? `<li class="medio"><span>${esc(C.diaMedio)}</span></li>` : "") +
+      `<li class="${i.icono ? "con-ico" : ""}">${i.icono ? `<div class="ico" style="--ic:url('${base}${esc(i.icono)}')" aria-hidden="true"></div>` : ""}<div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
+  }
   $("#dress").textContent = C.dressCode;
   $("#lugarNombre").textContent = C.lugar.nombre;
   $("#lugarDir").textContent = C.lugar.direccion;
