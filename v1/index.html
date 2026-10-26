@@ -174,6 +174,11 @@ section{scroll-margin-top:72px}
 #pelicula h2{color:var(--lilac)}
 .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
 .head p{max-width:34ch;font-size:1.15rem;margin:0;opacity:.9}
+#dia .head{flex-direction:column;align-items:flex-start;gap:12px}
+#dia .head p{max-width:none;font-size:clamp(1rem,1.6vw,1.3rem);font-weight:600}
+@media(min-width:900px){#dia .head p{white-space:nowrap}}
+.holaInv{display:inline-block;position:relative;z-index:3;margin-bottom:18px;background:var(--yellow);color:var(--green);font-weight:800;font-size:clamp(1.3rem,2.6vw,1.8rem);padding:8px 18px;border-radius:999px;transform:rotate(-2deg);box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.holaInv[hidden]{display:none}
 .story{max-width:62ch;font-size:1.25rem;line-height:1.6;margin:-8px 0 44px}
 .film{position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;background:#0c241c}
 @media(max-width:640px){.film{aspect-ratio:4/5;border-radius:16px}}
@@ -291,15 +296,15 @@ textarea{min-height:90px;resize:vertical}
 .done .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
 
 /* FAQ */
-#faq{background:var(--pink);color:#fff}
+#faq{background:#FDEEF3;color:var(--green)}
 .faq{max-width:820px;margin-top:36px}
 .faq details{border-top:3px solid var(--green);padding:20px 0}
 .faq details:last-child{border-bottom:3px solid var(--green)}
 .faq summary{cursor:pointer;list-style:none;font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:700;letter-spacing:-.02em;display:flex;justify-content:space-between;gap:16px;color:var(--green)}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-size:1.8rem;line-height:1;color:var(--yellow);transition:transform .2s}
+.faq summary::after{content:"+";font-size:1.8rem;line-height:1;color:var(--pink);transition:transform .2s}
 .faq details[open] summary::after{transform:rotate(45deg)}
-.faq p{margin:12px 0 0;color:#fff;max-width:60ch;font-weight:500}
+.faq p{margin:12px 0 0;color:var(--ink-soft);max-width:60ch}
 .faq details p+p{margin-top:8px}
 .faq .mapbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 
@@ -352,6 +357,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
       <div class="tabla"><b>26.03.2027</b><span>17 hs | La Herencia, Pilar</span></div>
     </div>
   <div class="wrap">
+    <div class="holaInv" id="holaInv" hidden></div>
     <h1 id="nombres"><span class="l1">¡Nos</span><span class="l2">casamos!</span></h1>
     <p class="sub" id="heroSub">¡Y quisiéramos festejarlo con vos!</p>
   </div>
@@ -548,7 +554,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
       inv = d;
       try { localStorage.setItem("rsvp_code", code); } catch (_) {}
       if (!DEMO) { try { const url = new URL(location.href); url.searchParams.set("c", code); history.replaceState(null, "", url); } catch (_) {} }
-      $("#heroSub").textContent = `¡Hola, ${d.nombre.split(" ")[0]}! ¡Y quisiéramos festejarlo con vos!`;
+      { const h = $("#holaInv"); h.textContent = `¡Hola, ${d.nombre.split(" ")[0]}!`; h.hidden = false; }
       d.respuesta ? renderDone(d.respuesta, true) : renderForm();
     } catch (err) {
       renderCode("No pudimos conectarnos. Revisá tu conexión y probá de nuevo.");
