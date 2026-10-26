@@ -28,6 +28,8 @@ const CONFIG = {
 
   // Texto de "Nuestra historia": un párrafo por elemento. Vacío = no se muestra.
   historia: [],
+  // Fotos de la cuadrícula de la portada (carpeta fotos/portada). Para sumar más: agregar números.
+  portada: Array.from({ length: 32 }, (_, i) => `../fotos/portada/p${String(i + 1).padStart(2, "0")}.jpg`),
   fotos: ["01","02","03","04","05","06","07","08","10","11","12","13","14","15"].map(n => `../fotos/${n}.jpg`),
   // Canción para la película de fotos (archivo .mp3 en la carpeta del sitio). Vacío = sin botón de música.
   musica: "",
@@ -104,7 +106,15 @@ nav a.cta{background:var(--green);color:var(--yellow)}
 @media(max-width:520px){nav a.opt{display:none}}
 
 /* HERO */
-.hero{background:var(--pink);color:var(--white);min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 0 80px}
+.hero{background:var(--pink);color:var(--white);min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 0 80px;position:relative}
+.mosaic{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:4px;background:#111;z-index:0}
+.mosaic .t{position:relative;overflow:hidden;background:#222}
+.mosaic .t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.2s ease,transform 6s ease}
+.mosaic .t img.on{opacity:1;transform:scale(1)}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(18,10,14,.55) 0%,rgba(18,10,14,.25) 40%,rgba(18,10,14,.6) 100%),rgba(224,69,123,.18)}
+.hero .wrap{z-index:2}
+.hero h1,.hero .sub{text-shadow:0 4px 30px rgba(0,0,0,.45)}
+@media(max-width:760px){.mosaic{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(5,1fr);gap:3px}}
 .hero .wrap{position:relative;width:100%}
 .hero h1{font-size:clamp(5rem,21vw,16rem);line-height:.8;letter-spacing:-.06em;position:relative;z-index:3}
 .hero h1 .l2{display:block;padding-left:.55em;color:var(--yellow)}
@@ -120,7 +130,7 @@ nav a.cta{background:var(--green);color:var(--yellow)}
   .sticker.s1{width:42vw;right:-4%;top:auto;bottom:-4%}
   .sticker.s2{width:34vw;right:34%;bottom:-10%}
   .sticker.s3{display:none}
-  .hero .wrap{padding-bottom:58vw}
+  .hero .wrap{padding-bottom:40vw}
 }
 .stamp{position:absolute;z-index:4;width:150px;height:150px;left:52%;top:-4%;color:var(--green)}
 .stamp .disc{position:absolute;inset:0;border-radius:50%;background:var(--yellow)}
@@ -313,6 +323,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 </nav>
 
 <header class="hero" id="inicio">
+  <div class="mosaic" id="mosaic" aria-hidden="true"></div>
   <div class="wrap">
     <div class="stamp" aria-hidden="true">
       <div class="disc"></div>
@@ -322,9 +333,6 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
     </div>
     <h1 id="nombres"><span class="l1">agus</span><span class="l2">y guido</span></h1>
     <p class="sub" id="heroSub">¡Nos casamos! Y queremos festejarlo con vos.</p>
-    <div class="sticker s1"><img id="st1" alt=""></div>
-    <div class="sticker s2"><img id="st2" alt=""></div>
-    <div class="sticker s3"><img id="st3" alt=""></div>
   </div>
 </header>
 
@@ -419,9 +427,37 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 
   /* ---------- Contenido ---------- */
   const F = C.fotos;
-  const fotoBase = F[0] ? F[0].replace(/[^/]*$/, "") : "fotos/";
-  const stickers = [fotoBase + "17.jpg", fotoBase + "18.jpg", fotoBase + "16.jpg"];   // fotos de las polaroids de la portada
-  ["#st1", "#st2", "#st3"].forEach((s, i) => { const im = $(s); if (stickers[i]) im.src = stickers[i]; else im.parentNode.remove(); });
+  /* ---------- Cuadrícula de fotos de la portada ---------- */
+  (() => {
+    const box = $("#mosaic"), P = [...(C.portada || [])];
+    if (!box || !P.length) return;
+    for (let i = P.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [P[i], P[j]] = [P[j], P[i]]; }
+    let tiles = [], cols = 0;
+    const build = () => {
+      const n = matchMedia("(max-width:760px)").matches ? 15 : 15;
+      if (tiles.length === n) return;
+      box.innerHTML = ""; tiles = [];
+      for (let i = 0; i < n; i++) {
+        const t = document.createElement("div"); t.className = "t";
+        const a = new Image(), b = new Image(); a.alt = b.alt = ""; a.decoding = b.decoding = "async";
+        a.src = P[i % P.length]; a.onload = () => a.classList.add("on");
+        t.append(a, b); box.appendChild(t); tiles.push({ a, b, cur: a, src: a.src.split("/").pop() });
+      }
+    };
+    build();
+    if (reduce || P.length <= tiles.length) return;
+    let next = tiles.length, last = -1;
+    const swap = () => {
+      if (document.hidden) return;
+      let k; do { k = Math.floor(Math.random() * tiles.length); } while (k === last && tiles.length > 1); last = k;
+      const t = tiles[k], showing = new Set(tiles.map(x => x.src));
+      let src, guard = 0; do { src = P[next++ % P.length]; } while (showing.has(src.split("/").pop()) && ++guard < P.length);
+      const nx = t.cur === t.a ? t.b : t.a;
+      nx.onload = () => { nx.classList.add("on"); t.cur.classList.remove("on"); t.cur = nx; t.src = src.split("/").pop(); };
+      nx.src = src;
+    };
+    setInterval(swap, 1400);
+  })();
   const tk = `<span>viernes 26 de marzo</span><i>✺</i><span>La Herencia, La Lonja</span><i>✺</i><span>confirmá antes del 30 de noviembre</span><i>✺</i>`;
   $("#ticker").innerHTML = tk.repeat(4);
   if (C.historia.length) { const s = $("#story"); s.hidden = false; s.innerHTML = C.historia.map(p => `<p>${esc(p)}</p>`).join(""); }
