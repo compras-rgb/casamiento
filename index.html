@@ -418,7 +418,9 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 
   /* ---------- Contenido ---------- */
   const F = C.fotos;
-  ["#st1", "#st2", "#st3"].forEach((s, i) => { const im = $(s); if (F[[2, 0, 7][i]]) im.src = F[[2, 0, 7][i]]; else im.parentNode.remove(); });
+  const fotoBase = F[0] ? F[0].replace(/[^/]*$/, "") : "fotos/";
+  const stickers = [F[2], F[0], fotoBase + "16.jpg"];   // fotos de las polaroids de la portada
+  ["#st1", "#st2", "#st3"].forEach((s, i) => { const im = $(s); if (stickers[i]) im.src = stickers[i]; else im.parentNode.remove(); });
   const tk = `<span>viernes 26 de marzo</span><i>✺</i><span>La Herencia, La Lonja</span><i>✺</i><span>confirmá antes del 30 de noviembre</span><i>✺</i>`;
   $("#ticker").innerHTML = tk.repeat(4);
   if (C.historia.length) { const s = $("#story"); s.hidden = false; s.innerHTML = C.historia.map(p => `<p>${esc(p)}</p>`).join(""); }
