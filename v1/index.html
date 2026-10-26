@@ -103,20 +103,20 @@ nav::-webkit-scrollbar{display:none}
 nav a{white-space:nowrap;text-decoration:none;font-size:.92rem;font-weight:500;padding:8px 14px;border-radius:999px;color:var(--green)}
 nav a:hover{background:#F1EEE8}
 nav a.cta{background:var(--green);color:var(--yellow)}
-@media(max-width:520px){nav a.opt{display:none}}
+@media(max-width:520px){nav a{padding:8px 11px;font-size:.86rem}}
 
 /* HERO */
 .hero{background:var(--pink);color:var(--white);min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 0 80px;position:relative}
 .mosaic{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:4px;background:#111;z-index:0}
 .mosaic .t{position:relative;overflow:hidden;background:#222}
-.mosaic .t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.2s ease,transform 6s ease}
+.mosaic .t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.15);transition:opacity .7s ease,transform 4s ease}
 .mosaic .t img.on{opacity:1;transform:scale(1)}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(18,10,14,.55) 0%,rgba(18,10,14,.25) 40%,rgba(18,10,14,.6) 100%),rgba(224,69,123,.18)}
 .hero .wrap{z-index:2}
 .hero h1,.hero .sub{text-shadow:0 4px 30px rgba(0,0,0,.45)}
 @media(max-width:760px){.mosaic{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(5,1fr);gap:3px}}
 .hero .wrap{position:relative;width:100%}
-.hero h1{font-size:clamp(5rem,21vw,16rem);line-height:.8;letter-spacing:-.06em;position:relative;z-index:3}
+.hero h1{font-size:clamp(4.4rem,16vw,13rem);line-height:.8;letter-spacing:-.06em;position:relative;z-index:3}
 .hero h1 .l2{display:block;padding-left:.55em;color:var(--yellow)}
 .hero .sub{margin-top:28px;font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:500;max-width:30ch;position:relative;z-index:3}
 .hero .btn{margin-top:30px;position:relative;z-index:3}
@@ -138,7 +138,18 @@ nav a.cta{background:var(--green);color:var(--yellow)}
 .stamp .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;line-height:.9}
 .stamp .c b{font-size:2.6rem;letter-spacing:-.04em}
 .stamp .c span{font-size:.85rem;font-weight:600;margin-top:4px}
-@media(max-width:760px){.stamp{width:120px;height:120px;left:4%;right:auto;top:auto;bottom:4vw}.stamp .c b{font-size:2rem}.hero h1{font-size:25vw}}
+@media(max-width:760px){.hero h1{font-size:18vw}.hero h1 .l2{padding-left:.2em}}
+.hero .sub{font-size:clamp(1.4rem,3.4vw,2.2rem)!important;font-weight:700;line-height:1.15;max-width:28ch!important}
+.cartel{position:absolute;z-index:3;right:clamp(14px,5vw,80px);top:0;width:clamp(210px,24vw,300px);transform-origin:50% 0;animation:hamaca 3.6s ease-in-out infinite;color:#f3efe6;pointer-events:none}
+.cartel.off{opacity:0;transform:translateY(-120%);transition:all .5s}
+.cartel .hilos{display:block;width:100%;height:clamp(70px,11vh,120px)}
+.cartel .clavo{position:absolute;left:50%;top:-6px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--yellow);box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.cartel .tabla{margin-top:-6px;background:var(--yellow);color:var(--green);border:4px solid var(--green);border-radius:16px;padding:14px 16px 16px;text-align:center;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+.cartel .tabla b{display:block;font-size:clamp(2rem,3.6vw,2.9rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.cartel .tabla span{display:block;margin-top:6px;font-weight:700;font-size:clamp(.9rem,1.2vw,1.05rem)}
+@keyframes hamaca{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@media(max-width:760px){.cartel{right:auto;left:50%;margin-left:-115px;width:230px;top:calc(100px + 40vw + 120px)}.cartel .hilos{height:56px}.cartel .clavo{top:-8px}.cartel .tabla{padding:12px 10px 14px}.cartel .tabla b{font-size:2.1rem}}
+@media(prefers-reduced-motion:reduce){.cartel{animation:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:16px 28px;font:inherit;font-size:1.05rem;font-weight:700;text-decoration:none;cursor:pointer;background:var(--green);color:var(--yellow);transition:transform .15s,background .2s}
@@ -315,24 +326,21 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 <body>
 
 <nav aria-label="Secciones">
-  <a href="#pelicula">Fotos</a>
-  <a href="#dia">El día</a>
-  <a href="#lugar" class="opt">Cómo llegar</a>
-  <a href="#faq" class="opt">Preguntas</a>
-  <a href="#rsvp" class="cta">Confirmar</a>
+  <a href="#dia">¿Cuál es el plan?</a>
+  <a href="#faq">Dudas</a>
+  <a href="#rsvp" class="cta">Confirmar asistencia</a>
 </nav>
 
 <header class="hero" id="inicio">
   <div class="mosaic" id="mosaic" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="stamp" aria-hidden="true">
-      <div class="disc"></div>
-      <svg viewBox="0 0 150 150"><defs><path id="circ" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs>
-        <text font-family="Bricolage Grotesque, sans-serif" font-size="13" font-weight="700" letter-spacing="2.2" fill="currentColor"><textPath href="#circ">viernes 26 de marzo ✺ la herencia ✺ </textPath></text></svg>
-      <div class="c"><b>26.03</b><span>2027</span></div>
+  <div class="cartel" role="img" aria-label="26 de marzo de 2027, 17 horas, La Herencia, Pilar">
+      <svg class="hilos" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><path d="M150 0 L40 200 M150 0 L260 200" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+      <span class="clavo" aria-hidden="true"></span>
+      <div class="tabla"><b>26.03.2027</b><span>17 hs | La Herencia, Pilar</span></div>
     </div>
-    <h1 id="nombres"><span class="l1">agus</span><span class="l2">y guido</span></h1>
-    <p class="sub" id="heroSub">¡Nos casamos! Y queremos festejarlo con vos.</p>
+  <div class="wrap">
+    <h1 id="nombres"><span class="l1">¡Nos</span><span class="l2">casamos!</span></h1>
+    <p class="sub" id="heroSub">¡Y quisiéramos festejarlo con vos!</p>
   </div>
 </header>
 
@@ -456,7 +464,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
       nx.onload = () => { nx.classList.add("on"); t.cur.classList.remove("on"); t.cur = nx; t.src = src.split("/").pop(); };
       nx.src = src;
     };
-    setInterval(swap, 1400);
+    setInterval(() => { swap(); setTimeout(swap, 350); }, 1100);
   })();
   const tk = `<span>viernes 26 de marzo</span><i>✺</i><span>La Herencia, La Lonja</span><i>✺</i><span>confirmá antes del 30 de noviembre</span><i>✺</i>`;
   $("#ticker").innerHTML = tk.repeat(4);
@@ -561,7 +569,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
       inv = d;
       try { localStorage.setItem("rsvp_code", code); } catch (_) {}
       if (!DEMO) { try { const url = new URL(location.href); url.searchParams.set("c", code); history.replaceState(null, "", url); } catch (_) {} }
-      $("#heroSub").textContent = `¡Hola, ${d.nombre.split(" ")[0]}! Nos casamos y queremos festejarlo con vos.`;
+      $("#heroSub").textContent = `¡Hola, ${d.nombre.split(" ")[0]}! ¡Y quisiéramos festejarlo con vos!`;
       d.respuesta ? renderDone(d.respuesta, true) : renderForm();
     } catch (err) {
       renderCode("No pudimos conectarnos. Revisá tu conexión y probá de nuevo.");
