@@ -51,15 +51,15 @@ const CONFIG = {
     { hora: "01 hs", que: "Comida bajón", detalle: "…y te rajamos", icono: "ic_car.png" },
   ],
   diaMedio: "Lo del medio es sorpresa",   // texto entre el primer y el último horario ("" = no se muestra)
-  dressCode: "Elegante para llegar. Cuando arranca la fiesta, ponete cómodo. Hay jardín: mejor taco ancho que aguja.",
+  dressCode: "Elegante, pero después en la fiesta ponete cómodo, que es lo más importante.",
 
+  // Preguntas: r = lista de párrafos. mapas: true agrega los botones de Waze y Google Maps.
   preguntas: [
-    { p: "Es Viernes Santo y no como carne, ¿qué hago?", r: "Tranqui, lo tuvimos en cuenta. Cuando confirmes, elegí el menú Vegetariano y listo: vas a comer igual de bien." },
-    { p: "¿Puedo ir con acompañante?", r: "Las invitaciones son personales. Si tenés alguna duda, escribinos." },
-    { p: "¿Pueden ir chicos?", r: "Esta vez la fiesta es solo para adultos. ¡Gracias por entender!" },
-    { p: "¿Hay estacionamiento?", r: "Sí, el salón tiene estacionamiento propio." },
-    { p: "¿Hasta cuándo puedo confirmar?", r: "Hasta el 30 de noviembre de 2026. Podés cambiar tu respuesta cuando quieras entrando de nuevo con tu link." },
-    { p: "Tengo una restricción alimentaria", r: "Contanos en el formulario (celiaquía, vegano, alergias, lo que sea) y lo coordinamos con el catering." },
+    { p: "¿Dónde es el casamiento?", r: ["En el salón La Herencia, en Pilar.", "Tené en cuenta que el salón tiene estacionamiento privado.", "Acá te dejamos un link directo para saber cómo llegar:"], mapas: true },
+    { p: "Quiero tomarme hasta el agua de los floreros y no quiero manejar", r: ["Más cerca de la fecha vamos a estar organizando remises puerta a puerta por zona o combis, según prefiera cada uno. Cuando completes el formulario de asistencia, tildá esa opción así te ayudamos a coordinar."] },
+    { p: "¿Puedo ir con acompañante?", r: ["Las invitaciones son personales."] },
+    { p: "¿Pueden ir chicos?", r: ["Esta vez la fiesta es solo para adultos. ¡Gracias por entender!"] },
+    { p: "Restricciones y preferencias alimentarias", r: ["Cuando confirmes asistencia hay una parte en donde te preguntamos cualquier cosa que tengamos que tener en cuenta. No te preocupes: prestamos especial atención a esto para que todos coman rico.", "Tené en cuenta que el 26 de marzo es Viernes Santo: si ese día elegís no comer carne, poné la opción vegetariana cuando confirmes asistencia."] },
   ],
 
   regalos: {
@@ -103,7 +103,8 @@ nav::-webkit-scrollbar{display:none}
 nav a{white-space:nowrap;text-decoration:none;font-size:.92rem;font-weight:500;padding:8px 14px;border-radius:999px;color:var(--green)}
 nav a:hover{background:#F1EEE8}
 nav a.cta{background:var(--green);color:var(--yellow)}
-@media(max-width:520px){nav a{padding:8px 11px;font-size:.86rem}}
+@media(max-width:560px){nav{left:8px;right:8px;transform:none;max-width:none;display:grid;grid-template-columns:1fr 1.05fr 1.1fr}nav a{white-space:normal;text-align:center;line-height:1.1;font-size:.82rem;padding:7px 6px;display:flex;align-items:center;justify-content:center}}
+section{scroll-margin-top:72px}
 
 /* HERO */
 .hero{background:var(--pink);color:var(--white);min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 0 80px;position:relative}
@@ -208,16 +209,20 @@ nav a.cta{background:var(--green);color:var(--yellow)}
 .steps{list-style:none;margin:0;padding:0;counter-reset:s}
 .steps li{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:20px 0;border-top:3px solid var(--green)}
 .steps li:last-child{border-bottom:3px solid var(--green)}
-.steps.hitos li.con-ico{grid-template-columns:120px 1fr;grid-template-areas:"ico h" "ico t";align-items:end;column-gap:20px;row-gap:2px;padding:22px 0}
-.steps.hitos li.con-ico .ico{grid-area:ico;width:120px;height:120px;background:var(--green);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;align-self:center}
+.steps.hitos{position:relative}
+.steps.hitos::before{content:"";position:absolute;left:58px;top:40px;bottom:40px;border-left:5px dotted var(--green)}
+.steps.hitos li.con-ico{position:relative;grid-template-columns:120px 1fr;grid-template-areas:"ico h" "ico t";align-items:end;column-gap:20px;row-gap:2px;padding:20px 0;border:0!important}
+.steps.hitos .icw{grid-area:ico;position:relative;z-index:1;width:120px;height:120px;border-radius:50%;background:var(--orange);display:grid;place-items:center;align-self:center}
+.steps.hitos .ico{width:100px;height:100px;background:var(--green);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
 .steps.hitos li.con-ico .h{grid-area:h;display:inline-block;justify-self:start;background:var(--yellow);color:var(--green);padding:2px 12px;border-radius:999px;transform:rotate(-3deg);font-size:1.25rem}
 .steps.hitos li.con-ico>div:last-child{grid-area:t;align-self:start}
 .steps.hitos li.con-ico:last-child .h{background:var(--pink);color:#fff;transform:rotate(2deg)}
 .steps.hitos li.con-ico b{font-size:clamp(2rem,4.6vw,2.8rem)}
 .steps.hitos li.con-ico span{font-size:1.15rem;font-weight:600}
-.steps.hitos li.medio{display:block;border-top:3px dashed var(--green);padding:16px 0;text-align:center}
-.steps.hitos li.medio span{display:inline-block;margin:0;font-weight:800;font-size:1.05rem;letter-spacing:.02em;background:var(--green);color:var(--yellow);padding:6px 16px;border-radius:999px;transform:rotate(-1.5deg)}
-.steps.hitos li.medio + li{border-top:3px dashed var(--green)}
+.steps.hitos li.medio .ico{width:84px;height:84px}
+.steps.hitos li.medio .h{background:var(--green);color:var(--yellow)}
+.steps.hitos li.medio b{font-size:clamp(1.5rem,3.4vw,2rem)!important}
+@media(max-width:560px){.steps.hitos li.con-ico{grid-template-columns:92px 1fr}.steps.hitos::before{left:44px}.steps.hitos .icw{width:92px;height:92px}.steps.hitos .ico{width:76px;height:76px}.steps.hitos li.medio .ico{width:64px;height:64px}}
 .steps .h{font-weight:800;font-size:1.3rem}
 .steps .h:empty::before{content:"después";font-weight:500;font-size:1rem;opacity:.75}
 .steps b{display:block;font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1}
@@ -290,7 +295,8 @@ textarea{min-height:90px;resize:vertical}
 .faq summary::after{content:"+";font-size:1.8rem;line-height:1;color:var(--pink);transition:transform .2s}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq p{margin:12px 0 0;color:var(--ink-soft);max-width:60ch}
-.faq details.hi summary{color:var(--pink-deep)}
+.faq details p+p{margin-top:8px}
+.faq .mapbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 
 /* REGALOS */
 #regalos{background:var(--yellow);color:var(--green)}
@@ -327,7 +333,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 
 <nav aria-label="Secciones">
   <a href="#dia">¿Cuál es el plan?</a>
-  <a href="#faq">Dudas</a>
+  <a href="#faq">Detalles generales</a>
   <a href="#rsvp" class="cta">Confirmar asistencia</a>
 </nav>
 
@@ -346,30 +352,9 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 
 <div class="ticker" aria-hidden="true"><div class="track" id="ticker"></div></div>
 
-<section id="pelicula">
-  <div class="wrap">
-    <div class="head">
-      <h2>Nosotros</h2>
-      <p>Algunos de nuestros lugares favoritos, juntos.</p>
-    </div>
-    <div class="story" id="story" hidden></div>
-    <div class="film" id="film" aria-label="Película de fotos">
-      <div class="bar">
-        <button type="button" id="playBtn" aria-label="Pausar">❚❚</button>
-        <div class="dots" id="dots"></div>
-        <button type="button" id="musicBtn" hidden>♫ Con música</button>
-      </div>
-    </div>
-    <button class="btn y grid-toggle" type="button" id="gridBtn">Ver todas las fotos</button>
-    <div class="grid" id="grid"></div>
-    <div class="video" id="video" hidden></div>
-    <audio id="audio" loop preload="none"></audio>
-  </div>
-</section>
-
 <section id="dia">
   <div class="wrap">
-    <div class="head"><h2>El día</h2><p id="diaFecha"></p></div>
+    <div class="head"><h2>¿Cuál es el plan?</h2><p id="diaFecha"></p></div>
     <div class="day">
       <ol class="steps" id="steps"></ol>
       <div class="dress"><h3>Dress code</h3><p id="dress"></p></div>
@@ -377,28 +362,11 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="lugar">
-  <div class="wrap">
-    <div class="head"><h2 style="color:var(--green)">Cómo llegar</h2></div>
-    <div class="place">
-      <div class="info">
-        <h3 id="lugarNombre"></h3>
-        <div class="addr" id="lugarDir"></div>
-        <p id="lugarNota"></p>
-        <div class="btns">
-          <a class="btn sm" id="mapsBtn" target="_blank" rel="noopener">Abrir en Google Maps</a>
-          <a class="btn sm ghost" id="wazeBtn" target="_blank" rel="noopener">Abrir en Waze</a>
-        </div>
-      </div>
-      <iframe id="mapa" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de La Herencia Eventos"></iframe>
-    </div>
-  </div>
-</section>
 
 
 <section id="faq">
   <div class="wrap">
-    <h2 style="color:var(--green)">Preguntas</h2>
+    <h2 style="color:var(--green)">Detalles generales</h2>
     <div class="faq" id="faqList"></div>
   </div>
 </section>
@@ -453,7 +421,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
       }
     };
     build();
-    if (reduce || P.length <= tiles.length) return;
+    if (P.length <= tiles.length) return;
     let next = tiles.length, last = -1;
     const swap = () => {
       if (document.hidden) return;
@@ -474,21 +442,18 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   else {
     const base = F[0] ? F[0].replace(/[^/]*$/, "") : "fotos/";
     $("#steps").classList.add("hitos");
-    $("#steps").innerHTML = C.dia.map((i, k) => (k > 0 && C.diaMedio ? `<li class="medio"><span>${esc(C.diaMedio)}</span></li>` : "") +
-      `<li class="${i.icono ? "con-ico" : ""}">${i.icono ? `<div class="ico" style="--ic:url('${base}${esc(i.icono)}')" aria-hidden="true"></div>` : ""}<div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
+    const SHH = "data:image/svg+xml," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='46' cy='50' r='34'/><path d='M29 45q6 5 12 0M51 45q6 5 12 0'/><path d='M32 67h8M54 67h8'/><path d='M42 92V60a5 5 0 0 1 10 0v32'/><path d='M80 30l8-8M84 42l10-2M78 20l2-10'/></svg>");
+    const icono = i => `<div class="icw" aria-hidden="true"><div class="ico" style="--ic:url(&quot;${i}&quot;)"></div></div>`;
+    $("#steps").innerHTML = C.dia.map((i, k) => (k > 0 && C.diaMedio ? `<li class="con-ico medio">${icono(SHH)}<div class="h">Shhh…</div><div><b>${esc(C.diaMedio)}</b></div></li>` : "") +
+      `<li class="con-ico">${icono(base + esc(i.icono))}<div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
   }
   $("#dress").textContent = C.dressCode;
-  $("#lugarNombre").textContent = C.lugar.nombre;
-  $("#lugarDir").textContent = C.lugar.direccion;
-  $("#lugarNota").textContent = C.lugar.nota;
-  $("#mapsBtn").href = C.lugar.mapsLink;
-  $("#wazeBtn").href = C.lugar.wazeLink;
-  $("#mapa").src = C.lugar.mapsEmbed;
-  $("#faqList").innerHTML = C.preguntas.map((q, i) => `<details class="${i === 0 ? "hi" : ""}"><summary>${esc(q.p)}</summary><p>${esc(q.r)}</p></details>`).join("");
+  $("#faqList").innerHTML = C.preguntas.map(q => `<details><summary>${esc(q.p)}</summary>${[].concat(q.r).map(t => `<p>${esc(t)}</p>`).join("")}${q.mapas ? `<div class="mapbtns"><a class="btn sm" href="${esc(C.lugar.wazeLink)}" target="_blank" rel="noopener">Ir con Waze</a><a class="btn sm ghost" href="${esc(C.lugar.mapsLink)}" target="_blank" rel="noopener">Abrir en Google Maps</a></div>` : ""}</details>`).join("");
   $("#footContact").innerHTML = C.contactos.map(c => `<a class="btn w sm" href="https://wa.me/${esc(c.whatsapp.replace(/\D/g, ""))}" target="_blank" rel="noopener">WhatsApp ${esc(c.nombre)}</a>`).join("");
   $("#rsvpLead").textContent = `Confirmanos antes del ${C.fechaLimiteRSVP}. Si cambian los planes, podés cambiar tu respuesta cuando quieras.`;
   if (C.video) { const v = $("#video"); v.hidden = false; v.innerHTML = `<iframe src="${esc(C.video)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Video"></iframe>`; }
 
+  if ($("#film")) {
   /* ---------- Película ---------- */
   const film = $("#film"), bar = film.querySelector(".bar");
   F.forEach((f, i) => { const d = document.createElement("div"); d.className = "frame"; d.innerHTML = `<div class="blur" style="background-image:url('${esc(f)}')"></div><img src="${esc(f)}" alt="" ${i > 1 ? 'loading="lazy"' : ""}>`; film.insertBefore(d, bar); });
@@ -529,6 +494,8 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   document.addEventListener("keydown", e => { if (!lb.classList.contains("open")) return; if (e.key === "Escape") close(); if (e.key === "ArrowLeft") show(li - 1); if (e.key === "ArrowRight") show(li + 1); });
   let sx = null; lb.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
   lb.addEventListener("touchend", e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) show(li + (dx < 0 ? 1 : -1)); sx = null; });
+
+  }
 
   /* ---------- API ---------- */
   const DEMO_DB = { DEMO: { ok: true, codigo: "DEMO", nombre: "Martina Rodríguez", deParte: "Agus", respuesta: null } };
@@ -598,7 +565,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
           <div class="field"><label class="lbl" for="alergias">¿Alguna alergia u otra restricción?</label><input id="alergias" name="alergias" value="${esc(p.alergias || "")}" placeholder="Ej: alergia a los frutos secos"></div>
           <div class="field">
             <span class="lbl">Traslados</span>
-            <label class="check"><input type="checkbox" name="traslado" id="traslado" ${p.traslado ? "checked" : ""}><span>Más adelante vamos a coordinar traslados entre invitados que viven cerca. <b>¿Te interesa sumarte?</b></span></label>
+            <label class="check"><input type="checkbox" name="traslado" id="traslado" ${p.traslado ? "checked" : ""}><span>Vamos a organizar remises puerta a puerta por zona o combis. <b>¿Querés que te ayudemos a coordinar tu traslado?</b></span></label>
           </div>
           <div class="field"><label class="lbl" for="cancion">Una canción que no puede faltar</label><input id="cancion" name="cancion" value="${esc(p.cancion || "")}" placeholder="La que te hace saltar a la pista"></div>
         </div>
