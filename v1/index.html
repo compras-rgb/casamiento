@@ -157,7 +157,8 @@ nav a.cta{background:var(--green);color:var(--yellow)}
 @media(max-width:640px){.film{aspect-ratio:4/5;border-radius:16px}}
 .film .frame{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
 .film .frame.on{opacity:1}
-.film .frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+.film .frame .blur{position:absolute;inset:-40px;background-position:center;background-size:cover;filter:blur(30px) brightness(.5) saturate(1.2)}
+.film .frame img{position:relative;width:100%;height:100%;object-fit:contain;transform:scale(1.02)}
 .film .frame.on img{animation:kb 7s ease-out forwards}
 .film .frame:nth-child(even).on img{animation-name:kb2}
 @keyframes kb{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.14) translate(-2%,-2%)}}
@@ -419,7 +420,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   /* ---------- Contenido ---------- */
   const F = C.fotos;
   const fotoBase = F[0] ? F[0].replace(/[^/]*$/, "") : "fotos/";
-  const stickers = [F[2], F[0], fotoBase + "16.jpg"];   // fotos de las polaroids de la portada
+  const stickers = [fotoBase + "17.jpg", fotoBase + "18.jpg", fotoBase + "16.jpg"];   // fotos de las polaroids de la portada
   ["#st1", "#st2", "#st3"].forEach((s, i) => { const im = $(s); if (stickers[i]) im.src = stickers[i]; else im.parentNode.remove(); });
   const tk = `<span>viernes 26 de marzo</span><i>✺</i><span>La Herencia, La Lonja</span><i>✺</i><span>confirmá antes del 30 de noviembre</span><i>✺</i>`;
   $("#ticker").innerHTML = tk.repeat(4);
@@ -446,7 +447,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 
   /* ---------- Película ---------- */
   const film = $("#film"), bar = film.querySelector(".bar");
-  F.forEach((f, i) => { const d = document.createElement("div"); d.className = "frame"; d.innerHTML = `<img src="${esc(f)}" alt="" ${i > 1 ? 'loading="lazy"' : ""}>`; film.insertBefore(d, bar); });
+  F.forEach((f, i) => { const d = document.createElement("div"); d.className = "frame"; d.innerHTML = `<div class="blur" style="background-image:url('${esc(f)}')"></div><img src="${esc(f)}" alt="" ${i > 1 ? 'loading="lazy"' : ""}>`; film.insertBefore(d, bar); });
   $("#dots").innerHTML = F.map(() => "<i></i>").join("");
   const frames = [...film.querySelectorAll(".frame")], dots = [...$("#dots").children];
   let cur = -1, timer = null, playing = !reduce;
