@@ -241,6 +241,25 @@ section{scroll-margin-top:72px}
 .dress{background:var(--green);color:#fff;border-radius:22px;padding:30px 28px;transform:rotate(1.5deg)}
 .dress h3{font-size:2.2rem;color:var(--yellow);margin-bottom:12px}
 .dress p{margin:0;font-size:1.1rem}
+@media(max-width:640px){
+  #dia{padding:64px 0 28px;min-height:100svh;box-sizing:border-box}
+  #dia h2{font-size:2.6rem}
+  #dia .head{margin-bottom:14px;gap:8px}
+  #dia .head p{font-size:.95rem}
+  #dia .day{gap:16px}
+  .steps.hitos li.con-ico{grid-template-columns:70px 1fr;column-gap:14px;padding:8px 0}
+  .steps.hitos::before{left:33px;top:30px;bottom:30px}
+  .steps.hitos .icw{width:70px;height:70px}
+  .steps.hitos .ico{width:60px;height:60px}
+  .steps.hitos li.medio .ico{width:50px;height:50px}
+  .steps.hitos li.con-ico .h{font-size:1rem;padding:1px 10px}
+  .steps.hitos li.con-ico b{font-size:1.55rem!important}
+  .steps.hitos li.medio b{font-size:1.3rem!important}
+  .steps.hitos li.con-ico span{font-size:.95rem}
+  .dress{padding:14px 18px;border-radius:16px;transform:rotate(1deg)}
+  .dress h3{font-size:1.35rem;margin-bottom:4px}
+  .dress p{font-size:.92rem;line-height:1.35}
+}
 
 /* LUGAR */
 #lugar{background:#fff}
@@ -333,6 +352,9 @@ textarea{min-height:90px;resize:vertical}
 footer{background:var(--yellow);color:var(--green);padding:64px 0 48px}
 footer .big{font-size:clamp(3rem,12vw,8rem);font-weight:800;letter-spacing:-.06em;line-height:.85;color:var(--pink)}
 footer .big em{font-style:normal;color:var(--green)}
+footer .vemos{display:flex;align-items:center;gap:clamp(12px,3vw,32px)}
+footer .carita{flex:0 0 auto;width:clamp(70px,14vw,150px);height:auto;color:var(--green);transform:rotate(-8deg);animation:carita 3s ease-in-out infinite}
+@keyframes carita{50%{transform:rotate(6deg) scale(1.05)}}
 footer .row{display:flex;flex-direction:column;gap:12px;margin-top:30px;align-items:flex-start}
 footer .row>span{font-weight:800;font-size:1.2rem}
 footer .wa{display:flex;gap:10px;flex-wrap:wrap}
@@ -408,7 +430,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <div class="big" id="nosVemos">nos vemos<br>el 26</div>
+    <div class="vemos"><div class="big" id="nosVemos">nos vemos<br>el 26</div><svg class="carita" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 8c26 1 50 20 51 50 1 30-22 53-52 53C29 111 8 89 9 59 10 31 31 9 58 9" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M41 44c1 6 1 10 0 14M79 42c1 6 1 11 0 15" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M33 71c8 16 21 23 32 22 13-1 22-9 27-22" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M24 60c3 1 6 1 9 0M88 59c3 1 6 1 9 0" stroke="#E0457B" stroke-width="5" stroke-linecap="round" opacity=".6"/></svg></div>
     <div class="row">
       <span>¿Dudas? Escribinos</span>
       <div class="wa" id="footContact"></div>
@@ -479,7 +501,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
   if (dR > 0) { $("#diasRsvp").textContent = dR; $("#cuentaRsvp").querySelector("span").innerHTML = dR === 1 ? "día para<br>confirmar" : "días para<br>confirmar"; } else $("#cuentaRsvp").hidden = true;
   const dF = faltan(C.fechaISO);
   if (dF > 1) $("#nosVemos").innerHTML = `nos vemos<br>en <em>${dF}</em> días`; else if (dF === 1) $("#nosVemos").innerHTML = "nos vemos<br><em>mañana</em>"; else $("#nosVemos").innerHTML = "¡hoy es<br>el día!";
-  $("#rsvpLead").textContent = `Confirmanos antes del ${C.fechaLimiteRSVP}. Si cambian los planes, podés cambiar tu respuesta cuando quieras.`;
+  $("#rsvpLead").textContent = `Tenés tiempo de confirmarnos hasta el ${C.fechaLimiteRSVP}.`;
   if (C.video) { const v = $("#video"); v.hidden = false; v.innerHTML = `<iframe src="${esc(C.video)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Video"></iframe>`; }
 
   if ($("#film")) {
