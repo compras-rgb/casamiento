@@ -290,6 +290,9 @@ textarea{min-height:90px;resize:vertical}
 .details[hidden]{display:none}
 .check{display:flex;gap:12px;align-items:flex-start;background:#F7F5F1;border-radius:14px;padding:14px 16px;cursor:pointer;font-size:1rem;line-height:1.45;border:2px solid transparent}
 .check:has(input:checked){border-color:var(--green);background:#EEF4EA}
+.dir{margin-top:12px}
+.dir[hidden]{display:none}
+.dir .small{display:block;margin-top:6px}
 .check input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:var(--green)}
 .small{font-size:.92rem;color:var(--ink-soft)}
 .msg{padding:12px 14px;border-radius:12px;margin:14px 0 0;font-size:.98rem}
@@ -587,6 +590,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
           <div class="field">
             <span class="lbl">Traslados</span>
             <label class="check"><input type="checkbox" name="traslado" id="traslado" ${p.traslado ? "checked" : ""}><span>Vamos a organizar remises puerta a puerta por zona o combis. <b>¿Querés que te ayudemos a coordinar tu traslado?</b></span></label>
+            <div class="dir" id="dirBox" ${p.traslado ? "" : "hidden"}><label class="lbl" for="direccion">¿Desde dónde salís?</label><input id="direccion" name="direccion" value="${esc(p.direccion || "")}" placeholder="Calle, altura y localidad (o al menos barrio y localidad)" autocomplete="street-address"><span class="small">Lo usamos solo para armar los traslados por zona.</span></div>
           </div>
           <div class="field"><label class="lbl" for="cancion">Una canción que no puede faltar</label><input id="cancion" name="cancion" value="${esc(p.cancion || "")}" placeholder="La que te hace saltar a la pista"></div>
         </div>
@@ -596,6 +600,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
         <p class="small" style="text-align:center;margin:16px 0 0">¿No sos ${esc(inv.nombre)}? <a href="#" id="otherCode">Ingresar otro código</a></p>
       </form>`;
     panel.querySelectorAll('input[name=asiste]').forEach(r => r.addEventListener("change", () => { $("#det").hidden = r.value !== "Sí"; }));
+    $("#traslado").addEventListener("change", e => { $("#dirBox").hidden = !e.target.checked; if (e.target.checked) $("#direccion").focus(); });
     $("#otherCode").onclick = e => { e.preventDefault(); try { localStorage.removeItem("rsvp_code"); } catch (_) {} renderCode(); };
     $("#rsvpForm").onsubmit = submit;
   }
@@ -625,7 +630,8 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
     const asiste = fd.get("asiste");
     if (!asiste) { msg.innerHTML = `<div class="msg err">Elegí si venís o no para poder enviar.</div>`; return; }
     const payload = { action: "rsvp", codigo: inv.codigo, asiste, mensaje: (fd.get("mensaje") || "").trim() };
-    if (asiste === "Sí") Object.assign(payload, { menu: fd.get("menu") || "Sin restricciones", alergias: (fd.get("alergias") || "").trim(), cancion: (fd.get("cancion") || "").trim(), traslado: fd.get("traslado") === "on" });
+    if (asiste === "Sí") Object.assign(payload, { menu: fd.get("menu") || "Sin restricciones", alergias: (fd.get("alergias") || "").trim(), cancion: (fd.get("cancion") || "").trim(), traslado: fd.get("traslado") === "on", direccion: fd.get("traslado") === "on" ? (fd.get("direccion") || "").trim() : "" });
+    if (asiste === "Sí" && payload.traslado && !payload.direccion) { msg.innerHTML = `<div class="msg err">Contanos desde dónde salís para poder armar el traslado.</div>`; $("#direccion").focus(); return; }
     const btn = $("#sendBtn"); btn.disabled = true; btn.textContent = "Enviando…"; msg.innerHTML = "";
     try {
       const r = await apiPost(payload);
