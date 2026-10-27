@@ -55,6 +55,7 @@ const CONFIG = {
   ],
   diaMedio: "Lo del medio es sorpresa",   // texto entre el primer y el último horario ("" = no se muestra)
   dressCode: "Elegante, pero después en la fiesta ponete cómodo, que es lo más importante.",
+  dressCode2: "En esta ocasión elegimos reservar los colores claros, nude y bordó para los novios. ¡Muchas gracias!",
 
   // Preguntas: r = lista de párrafos. mapas: true agrega los botones de Waze y Google Maps.
   preguntas: [
@@ -218,7 +219,7 @@ section{scroll-margin-top:72px}
 .steps li{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:20px 0;border-top:3px solid var(--green)}
 .steps li:last-child{border-bottom:3px solid var(--green)}
 .steps.hitos{position:relative}
-.steps.hitos::before{content:"";position:absolute;left:58px;top:40px;bottom:40px;border-left:5px dotted var(--green)}
+.steps.hitos::before{content:"";position:absolute;left:58px;top:var(--lt,40px);bottom:var(--lb,40px);border-left:5px dotted var(--green)}
 .steps.hitos li.con-ico{position:relative;grid-template-columns:120px 1fr;grid-template-areas:"ico h" "ico t";align-items:end;column-gap:20px;row-gap:2px;padding:20px 0;border:0!important}
 .steps.hitos .icw{grid-area:ico;position:relative;z-index:1;width:120px;height:120px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;align-self:center}
 .steps.hitos .ico{width:100px;height:100px;background:var(--green);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
@@ -241,14 +242,20 @@ section{scroll-margin-top:72px}
 .dress{background:var(--green);color:#fff;border-radius:22px;padding:30px 28px;transform:rotate(1.5deg)}
 .dress h3{font-size:2.2rem;color:var(--yellow);margin-bottom:12px}
 .dress p{margin:0;font-size:1.1rem}
+.dress .dress2{margin-top:10px;opacity:.85;font-size:1rem}
 @media(max-width:640px){
-  #dia{padding:64px 0 28px;min-height:100svh;box-sizing:border-box}
+  #dia{padding:24px 0 22px;min-height:calc(100svh - 72px);box-sizing:border-box;display:flex}
+  #dia>.wrap{display:flex;flex-direction:column;width:100%}
+  #dia .day{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+  .steps.hitos{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
   #dia h2{font-size:2.6rem}
   #dia .head{margin-bottom:14px;gap:8px}
   #dia .head p{font-size:.95rem}
   #dia .day{gap:16px}
-  .steps.hitos li.con-ico{grid-template-columns:70px 1fr;column-gap:14px;padding:8px 0}
-  .steps.hitos::before{left:33px;top:30px;bottom:30px}
+  .steps.hitos li.con-ico{grid-template-columns:70px 1fr;column-gap:14px;padding:6px 0}
+  #dia .day{gap:18px}
+  .dress .dress2{margin-top:6px;font-size:.85rem}
+  .steps.hitos::before{left:33px}
   .steps.hitos .icw{width:70px;height:70px}
   .steps.hitos .ico{width:60px;height:60px}
   .steps.hitos li.medio .ico{width:50px;height:50px}
@@ -402,7 +409,7 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
     <div class="head"><h2>¿Cuál es el plan?</h2><p id="diaFecha"></p></div>
     <div class="day">
       <ol class="steps" id="steps"></ol>
-      <div class="dress"><h3>Dress code</h3><p id="dress"></p></div>
+      <div class="dress"><h3>Dress code</h3><p id="dress"></p><p class="dress2" id="dress2"></p></div>
     </div>
   </div>
 </section>
@@ -490,10 +497,13 @@ footer .wa{display:flex;gap:10px;flex-wrap:wrap}
     $("#steps").classList.add("hitos");
     const SHH = "data:image/svg+xml," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='#000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='46' cy='50' r='34'/><path d='M29 45q6 5 12 0M51 45q6 5 12 0'/><path d='M32 67h8M54 67h8'/><path d='M42 92V60a5 5 0 0 1 10 0v32'/><path d='M80 30l8-8M84 42l10-2M78 20l2-10'/></svg>");
     const icono = i => `<div class="icw" aria-hidden="true"><div class="ico" style="--ic:url(&quot;${i}&quot;)"></div></div>`;
+    const linea = () => { const ol = $("#steps"), ic = ol.querySelectorAll(".icw"); if (ic.length < 2) return; const o = ol.getBoundingClientRect(), a = ic[0].getBoundingClientRect(), z = ic[ic.length - 1].getBoundingClientRect(); ol.style.setProperty("--lt", (a.top + a.height / 2 - o.top) + "px"); ol.style.setProperty("--lb", (o.bottom - (z.top + z.height / 2)) + "px"); };
+    addEventListener("resize", linea); addEventListener("load", linea); setTimeout(linea, 300);
     $("#steps").innerHTML = C.dia.map((i, k) => (k > 0 && C.diaMedio ? `<li class="con-ico medio">${icono(SHH)}<div class="h">Shhh…</div><div><b>${esc(C.diaMedio)}</b></div></li>` : "") +
       `<li class="con-ico">${icono(base + esc(i.icono))}<div class="h">${esc(i.hora)}</div><div><b>${esc(i.que)}</b><span>${esc(i.detalle)}</span></div></li>`).join("");
   }
   $("#dress").textContent = C.dressCode;
+  $("#dress2").textContent = C.dressCode2 || ""; if (!C.dressCode2) $("#dress2").remove();
   $("#faqList").innerHTML = C.preguntas.map(q => `<details><summary>${esc(q.p)}</summary>${[].concat(q.r).map(t => `<p>${esc(t)}</p>`).join("")}${q.mapas ? `<div class="mapbtns"><a class="btn sm" href="${esc(C.lugar.wazeLink)}" target="_blank" rel="noopener">Ir con Waze</a><a class="btn sm ghost" href="${esc(C.lugar.mapsLink)}" target="_blank" rel="noopener">Abrir en Google Maps</a></div>` : ""}</details>`).join("");
   $("#footContact").innerHTML = C.contactos.map(c => `<a class="btn w sm" href="https://wa.me/${esc(c.whatsapp.replace(/\D/g, ""))}" target="_blank" rel="noopener">WhatsApp ${esc(c.nombre)}</a>`).join("");
   const faltan = iso => Math.max(0, Math.ceil((new Date(iso) - Date.now()) / 864e5));
